@@ -215,9 +215,8 @@ ul { list-style: none; padding: 0; margin: 0; }
 .hero__slash {
   position: absolute;
   width: 16px; height: 33px;
-  background: #fff;
-  transform: skewX(-25deg);
-  border-radius: 0;
+  object-fit: contain;
+  pointer-events: none;
 }
 .hero__slash--1 { left: 51px;  top: 623px; }
 .hero__slash--2 { left: 170px; top: 623px; }
@@ -245,23 +244,14 @@ ul { list-style: none; padding: 0; margin: 0; }
   color: #fff;
 }
 
-/* 入場無料 badge */
+/* 入場無料 badge (テキスト込みPNG: 120x117) */
 .hero__free {
-  position: absolute; left: 244px; top: 604px;
-  width: 99px; height: 92px;
-  pointer-events: auto;
-}
-.hero__free img {
-  position: absolute; inset: -12% -10%;
-  width: 120%; height: 124%;
-}
-.hero__free-text {
-  position: absolute; left: 35px; top: 19px;
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: 700; font-size: 20px; line-height: 23px;
-  color: #010101; text-align: center;
-  transform: rotate(12deg); transform-origin: top left;
-  width: 49px;
+  position: absolute;
+  left: 234px;   /* 244 - 10 (badge extends 10px left of bbox) */
+  top: 592px;    /* 604 - 12 (badge extends 12px above bbox) */
+  width: 120px;
+  height: 117px;
+  pointer-events: none;
 }
 
 /* 会場 (venue) */
