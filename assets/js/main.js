@@ -80,31 +80,28 @@
 
   // ============ Archive auto-scroll ============
   const archiveScroll = document.getElementById('archiveScroll');
+  const archiveTrack = document.getElementById('archiveTrack');
   const archiveBtn = document.getElementById('archiveStopBtn');
   const archiveText = document.getElementById('archiveStopText');
 
-  let archiveTimer = null;
   let archivePlaying = true;
 
-  if (archiveScroll && archiveBtn) {
+  if (archiveScroll && archiveTrack && archiveBtn) {
     archiveBtn.dataset.state = 'stop';
+    archiveScroll.dataset.state = 'playing';
+
+    const photoItems = Array.from(archiveTrack.children);
+    photoItems.forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      archiveTrack.appendChild(clone);
+    });
 
     const startAutoScroll = () => {
-      if (archiveTimer) return;
-      archiveTimer = setInterval(() => {
-        const max = archiveScroll.scrollWidth - archiveScroll.clientWidth;
-        if (archiveScroll.scrollLeft >= max - 1) {
-          archiveScroll.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          archiveScroll.scrollBy({ left: 1, behavior: 'auto' });
-        }
-      }, 30);
+      archiveScroll.dataset.state = 'playing';
     };
     const stopAutoScroll = () => {
-      if (archiveTimer) {
-        clearInterval(archiveTimer);
-        archiveTimer = null;
-      }
+      archiveScroll.dataset.state = 'paused';
     };
 
     // 表示時に開始（パフォーマンスのため）
@@ -136,9 +133,11 @@
       }
     });
 
-    // ユーザー操作中は一時停止
+    archiveScroll.addEventListener('mouseenter', stopAutoScroll);
+    archiveScroll.addEventListener('mouseleave', () => {
+      if (archivePlaying) startAutoScroll();
+    });
     archiveScroll.addEventListener('touchstart', stopAutoScroll, { passive: true });
-    archiveScroll.addEventListener('mousedown', stopAutoScroll);
   }
 
   // ============ Contact form (デモ動作) ============
