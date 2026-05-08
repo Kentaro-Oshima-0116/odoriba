@@ -6,109 +6,107 @@
   <title>ODORIBA | 旭川ダンスショーケースイベント</title>
   <meta name="description" content="北海道最大級のストリートダンスイベント「オドリバ」。2026年9月5日・6日、当麻スポーツセンター開催。" />
 
-  <!-- Preload critical assets -->
-  <link rel="preload" as="image" href="assets/images/hero-bg.jpg" fetchpriority="high" />
+  <!-- Preload critical hero assets -->
+  <link rel="preload" as="image" href="assets/images/hero-illustration.png" fetchpriority="high" />
 
-  <!-- Google Fonts (Noto Sans JP + Roboto) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Roboto:wght@700&family=Nunito+Sans:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&family=Nunito+Sans:wght@700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
   <div class="page">
 
-    <!-- ================== HERO ================== -->
+    <!-- ================== HERO (Figma座標準拠：375 x 878) ================== -->
     <section class="hero">
-      <!-- 背景写真 -->
-      <picture class="hero__bg">
-        <img src="assets/images/hero-bg.jpg" alt="" fetchpriority="high" />
-      </picture>
-      <div class="hero__gradient"></div>
+      <!-- Hamburger menu (top-right) -->
+      <button class="hero__menu" aria-label="メニュー">
+        <span class="hero__menu-label">MENU</span>
+        <span class="hero__menu-icon">
+          <span></span><span></span>
+        </span>
+      </button>
 
-      <!-- ナビ -->
-      <header class="header">
-        <a href="#" class="header__logo">ODORIBA</a>
-        <button class="header__menu" aria-label="メニューを開く">
-          <span></span><span></span><span></span>
-        </button>
-      </header>
+      <!-- Main title text (white, 40px, 900) -->
+      <h1 class="hero__title">
+        踊る<span class="t-loose">場所</span>が、<br />こ<span class="t-tight">こにある。</span>
+      </h1>
 
-      <!-- 右上バッジ -->
-      <div class="hero__badge">
-        <img src="assets/images/badge-top-right.svg" alt="" loading="eager" />
-        <div class="hero__badge-text">
-          <p class="hero__badge-large">北海道<br />最大級</p>
-          <p class="hero__badge-small">ストリート<br />ダンスイベント</p>
-        </div>
+      <!-- ASAHIKAWA DANCE subtitle (17px Roboto, opacity 50%) -->
+      <p class="hero__subtitle">
+        ASAHIKAWA DANCE<br />
+        SHOWCASE EVENT
+      </p>
+
+      <!-- Top-right 北海道最大級 badge (green circle) -->
+      <div class="hero__brand-badge">
+        <span class="hero__brand-large">北海道<br />最大級</span>
+        <span class="hero__brand-small">ストリート<br />ダンスイベント</span>
       </div>
 
-      <!-- メインコピー -->
-      <div class="hero__copy">
-        <h1 class="hero__title">踊る場所が、<br />ここにある。</h1>
-        <p class="hero__subtitle">ASAHIKAWA DANCE<br />SHOWCASE EVENT</p>
-      </div>
+      <!-- Decorative elements -->
+      <img class="hero__deco hero__deco--tl" src="assets/images/deco-topleft.png" alt="" loading="eager" />
+      <img class="hero__deco hero__deco--tr" src="assets/images/deco-topright.png" alt="" loading="eager" />
+      <img class="hero__deco hero__deco--mr" src="assets/images/deco-midright.png" alt="" loading="eager" />
 
-      <!-- 日程 -->
+      <!-- Main illustration (dancers + logo) -->
+      <img class="hero__illust" src="assets/images/hero-illustration.png" alt="オドリバ ASAHIKAWA" fetchpriority="high" />
+
+      <!-- Date area -->
       <div class="hero__date">
         <p class="hero__year">2026</p>
-        <div class="hero__dates-row">
-          <div class="hero__date-block">
-            <span class="hero__big-num">9</span>
-            <span class="hero__slash"></span>
-            <span class="hero__big-num">5</span>
-            <span class="hero__day">SAT</span>
-          </div>
-          <span class="hero__dot"></span>
-          <div class="hero__date-block">
-            <span class="hero__big-num">9</span>
-            <span class="hero__slash"></span>
-            <span class="hero__big-num">6</span>
-            <span class="hero__day">SUN</span>
-          </div>
-          <!-- 入場無料バッジ -->
-          <div class="hero__free-badge">
-            <img src="assets/images/free-badge.svg" alt="" loading="eager" />
-            <span class="hero__free-text">入場<br />無料</span>
-          </div>
-        </div>
+        <div class="hero__nine"><span>9</span></div>
+        <div class="hero__slash hero__slash--1"></div>
+        <div class="hero__five"><span>5</span></div>
+        <div class="hero__day hero__day--sat"><span>SAT</span></div>
+        <div class="hero__dot"></div>
+        <div class="hero__nine2"><span>9</span></div>
+        <div class="hero__slash hero__slash--2"></div>
+        <div class="hero__six"><span>6</span></div>
+        <div class="hero__day hero__day--sun"><span>SUN</span></div>
         <p class="hero__open">AM10:00 OPEN</p>
 
-        <!-- 会場 -->
-        <div class="hero__venue">
-          <div class="hero__venue-label">
-            <span class="hero__venue-line"></span>
-            <span class="hero__venue-text">会場</span>
-            <span class="hero__venue-line"></span>
-          </div>
-          <p class="hero__venue-name">当麻スポーツセンター&amp;<br />当麻町公民館まとまーる</p>
+        <!-- 入場無料 badge -->
+        <div class="hero__free">
+          <img src="assets/images/free-badge.svg" alt="" loading="eager" />
+          <span class="hero__free-text">入場<br />無料</span>
         </div>
       </div>
 
-      <!-- CTAボタン -->
-      <div class="hero__cta">
-        <a href="#participate" class="btn btn--red">
-          <span>チームで応募</span>
-          <span class="btn__arrow">→</span>
-        </a>
-        <a href="#participate" class="btn btn--gray">
-          <span>個人で応募</span>
-          <span class="btn__arrow">→</span>
-        </a>
+      <!-- 会場 (venue) -->
+      <div class="hero__venue">
+        <span class="hero__venue-line hero__venue-line--l"></span>
+        <span class="hero__venue-label">会<br />場</span>
+        <span class="hero__venue-line hero__venue-line--r"></span>
+        <p class="hero__venue-name">当麻スポーツセンター&amp;<br />当麻町公民館まとまーる</p>
       </div>
+
+      <!-- CTA buttons -->
+      <a href="#participate" class="hero__btn hero__btn--red">
+        <span class="hero__btn-text">チームで応募</span>
+        <span class="hero__btn-arrow"></span>
+      </a>
+      <a href="#participate" class="hero__btn hero__btn--gray">
+        <span class="hero__btn-text">個人で応募</span>
+        <span class="hero__btn-arrow hero__btn-arrow--dark"></span>
+      </a>
     </section>
 
     <!-- ================== PHOTO STRIP ================== -->
     <section class="photo-strip">
-      <div class="photo-strip__row">
+      <div class="photo-strip__row photo-strip__row--top">
         <div class="photo-strip__photo">
           <img src="assets/images/photo-strip1.jpg" alt="" loading="lazy" decoding="async" />
         </div>
-        <div class="photo-strip__color photo-strip__color--brown"></div>
+        <div class="photo-strip__photo photo-strip__photo--wide">
+          <img src="assets/images/photo-strip2.jpg" alt="" loading="lazy" decoding="async" />
+        </div>
       </div>
-      <div class="photo-strip__row">
-        <div class="photo-strip__color photo-strip__color--gold"></div>
+      <div class="photo-strip__row photo-strip__row--bottom">
+        <div class="photo-strip__photo photo-strip__photo--wide">
+          <img src="assets/images/photo-strip3.jpg" alt="" loading="lazy" decoding="async" />
+        </div>
         <div class="photo-strip__photo">
           <img src="assets/images/photo-strip4.jpg" alt="" loading="lazy" decoding="async" />
         </div>
@@ -123,9 +121,9 @@
     <!-- ================== TIMETABLE ================== -->
     <section class="timetable">
       <p class="timetable__text">タイムテーブルは後日公開予定。<br />公式Instagramをご確認ください。</p>
-      <button class="btn btn--outline">
+      <button class="btn btn--gray btn--cta">
         <span>Coming Soon…</span>
-        <span class="btn__arrow">→</span>
+        <span class="btn__arrow btn__arrow--dark"></span>
       </button>
     </section>
 
@@ -186,18 +184,18 @@
       <article class="entry-card">
         <h3 class="entry-card__title">チームエントリー</h3>
         <p class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</p>
-        <a href="#" class="btn btn--red entry-card__btn">
+        <a href="#" class="btn btn--red btn--cta entry-card__btn">
           <span>チームで応募</span>
-          <span class="btn__arrow">→</span>
+          <span class="btn__arrow"></span>
         </a>
       </article>
 
       <article class="entry-card">
         <h3 class="entry-card__title">個人エントリー</h3>
         <p class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</p>
-        <button class="btn btn--gray entry-card__btn" disabled>
+        <button class="btn btn--gray btn--cta entry-card__btn" disabled>
           <span>Coming Soon…</span>
-          <span class="btn__arrow">→</span>
+          <span class="btn__arrow btn__arrow--dark"></span>
         </button>
       </article>
     </section>
@@ -242,7 +240,7 @@
         <button class="faq__tab faq__tab--active" role="tab" data-tab="visitor" aria-selected="true">来場者向け</button>
       </div>
 
-      <ul class="faq__list" id="faqList">
+      <ul class="faq__list">
         <li class="faq__item">
           <button class="faq__question">
             <span class="faq__q">Q</span>
@@ -368,15 +366,17 @@
     <!-- ================== FOLLOW US ================== -->
     <section class="follow">
       <h2 class="follow__title">
-        <span class="follow__bracket">&lt;</span>
+        <span class="follow__bracket follow__bracket--l"></span>
         FOLLOW US !
-        <span class="follow__bracket">&gt;</span>
+        <span class="follow__bracket follow__bracket--r"></span>
       </h2>
       <p class="follow__lead">最新情報・タイムテーブルはInstagramで</p>
       <a href="https://www.instagram.com/odoriba_official" target="_blank" rel="noopener noreferrer" class="follow__link">
         <span class="follow__avatar"></span>
         <span class="follow__handle">@odoriba_official</span>
-        <img class="follow__icon" src="assets/images/instagram-icon.svg" alt="" loading="lazy" />
+        <span class="follow__icon">
+          <span class="follow__arrow"></span>
+        </span>
       </a>
     </section>
 
@@ -402,9 +402,9 @@
           <label for="message">お問い合わせ内容</label>
           <textarea id="message" name="message" rows="5" placeholder="ご質問・ご相談内容をご記入ください"></textarea>
         </div>
-        <button type="submit" class="btn btn--black contact__submit">
+        <button type="submit" class="btn btn--black btn--cta contact__submit">
           <span>送信する</span>
-          <span class="btn__arrow">→</span>
+          <span class="btn__arrow"></span>
         </button>
       </form>
     </section>

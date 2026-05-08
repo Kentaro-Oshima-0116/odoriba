@@ -1,7 +1,6 @@
-/* ===========================
-   ODORIBA / Vanilla CSS
-   Mobile design 375px
-   =========================== */
+/* ===================================================
+   ODORIBA / Vanilla CSS — Figma座標準拠 375px固定
+   =================================================== */
 
 /* Reset */
 *, *::before, *::after { box-sizing: border-box; }
@@ -9,7 +8,7 @@ html, body { margin: 0; padding: 0; }
 body {
   font-family: "Noto Sans JP", sans-serif;
   -webkit-font-smoothing: antialiased;
-  background: #fff;
+  background: #1a1a1a;
   color: #000;
   line-height: 1.6;
 }
@@ -20,12 +19,11 @@ ul { list-style: none; padding: 0; margin: 0; }
 
 /* ============= Layout ============= */
 .page {
-  width: 100%;
-  max-width: 375px;
+  width: 375px;
   margin: 0 auto;
   background: #fff;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
 }
 
 /* ============= Common UI ============= */
@@ -33,336 +31,464 @@ ul { list-style: none; padding: 0; margin: 0; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  height: 49px;
-  padding: 0 24px;
+  gap: 8px;
   border-radius: 999px;
+  font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
   font-size: 18px;
-  letter-spacing: -0.54px;
-  color: #fff;
+  line-height: 20.7px;
   white-space: nowrap;
-  transition: opacity .2s, transform .2s;
+  letter-spacing: 0;
+  transition: transform .2s, opacity .2s;
 }
 .btn:hover { opacity: .9; }
 .btn:active { transform: scale(.98); }
-.btn--red { background: #f62343; }
-.btn--gray { background: #d9d9d9; }
-.btn--black { background: #000; }
-.btn--outline {
-  border: 1px solid #c8c8c8;
-  background: #fff;
-  color: #000;
+.btn--cta {
+  width: 263px; height: 49px;
 }
-.btn__arrow { font-size: 16px; }
+.btn--red { background: #f62343; color: #fff; }
+.btn--gray { background: #d9d9d9; color: #000; opacity: 1; }
+.btn--gray { color: rgba(0,0,0,.5); font-family: "Roboto", sans-serif; font-weight: 500; font-size: 16px; }
+.btn--black { background: #000; color: #fff; }
+
+/* 矢印アイコン: 白丸 + 中の山形 (>) */
+.btn__arrow {
+  position: relative;
+  width: 29px; height: 29px;
+  border-radius: 50%;
+  background: #fff;
+  flex-shrink: 0;
+}
+.btn__arrow::before, .btn__arrow::after {
+  content: "";
+  position: absolute;
+  width: 6px; height: 1px;
+  background: #f62343;
+  top: 50%; left: 50%;
+}
+.btn__arrow::before { transform: translate(-2px, -2px) rotate(45deg); }
+.btn__arrow::after  { transform: translate(-2px, 2px) rotate(-45deg); }
+.btn__arrow--dark::before, .btn__arrow--dark::after { background: #000; }
+.btn--black .btn__arrow::before, .btn--black .btn__arrow::after { background: #000; }
+.btn--gray .btn__arrow::before, .btn--gray .btn__arrow::after { background: #000; }
 
 .section-head { display: flex; flex-direction: column; gap: 0; }
 .section-head__en {
-  font-family: "Roboto", "Nunito Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 700;
   font-size: 16px;
+  line-height: 25.6px;
   opacity: .5;
   margin: 0;
-  line-height: 1.6;
+  color: #000;
 }
 .section-head__jp {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
   font-size: 28px;
+  line-height: 44.8px;
   margin: 0;
-  line-height: 1.6;
+  color: #000;
+  width: 260px;
 }
 .section-head--light .section-head__en,
 .section-head--light .section-head__jp { color: #fff; }
 
-/* ============= HERO ============= */
+/* ===========================================
+   HERO  (375 x 878, 黒背景 + イラスト)
+   =========================================== */
 .hero {
   position: relative;
-  width: 100%;
-  height: 880px;
+  width: 375px;
+  height: 878px;
+  background: #0b0b0b;
   overflow: hidden;
-  background: #000;
   color: #fff;
 }
-.hero__bg { position: absolute; inset: 0; z-index: 0; }
-.hero__bg img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center top;
-}
-.hero__gradient {
-  position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to bottom,
-    rgba(0,0,0,.7) 0%,
-    rgba(0,0,0,.2) 25%,
-    rgba(0,0,0,0) 60%,
-    rgba(0,0,0,.4) 100%);
-  pointer-events: none;
-}
 
-.header {
-  position: absolute; top: 0; left: 0; right: 0; z-index: 10;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 18px 20px;
+/* Hamburger menu (top-right corner) */
+.hero__menu {
+  position: absolute; left: 320px; top: 80px;
+  width: 40px; height: 30px;
+  z-index: 9;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
 }
-.header__logo {
-  font-weight: 900; font-size: 18px; letter-spacing: 2px;
-  color: #fff;
-}
-.header__menu {
-  display: flex; flex-direction: column; gap: 5px; padding: 8px;
-}
-.header__menu span {
-  display: block; width: 24px; height: 2px; background: #fff;
-}
-
-.hero__badge {
-  position: absolute; top: 44px; right: 16px;
-  width: 140px; height: 131px; z-index: 5;
-  display: flex; align-items: center; justify-content: center;
-}
-.hero__badge img {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
-}
-.hero__badge-text {
-  position: relative; z-index: 1; text-align: center; color: #010101;
-  font-weight: 900; line-height: 1.15;
-}
-.hero__badge-large { font-size: 18px; margin: 0; }
-.hero__badge-small { font-size: 11px; margin: 4px 0 0; line-height: 1.3; }
-
-.hero__copy {
-  position: absolute; left: 26px; top: 103px; z-index: 5;
-}
-.hero__title {
-  font-weight: 900; font-size: 40px; line-height: 1.15;
-  letter-spacing: -1.2px; margin: 0; color: #fff;
-}
-.hero__subtitle {
+.hero__menu-label {
   font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 17px; line-height: 1.25;
-  margin: 12px 0 0; color: rgba(255,255,255,.5);
-  letter-spacing: 0;
+  font-weight: 700; font-size: 10px; line-height: 11.5px;
+  color: #fff;
+}
+.hero__menu-icon {
+  display: inline-flex; flex-direction: column; gap: 4px;
+}
+.hero__menu-icon span {
+  display: block; width: 22px; height: 1px; background: #fff;
 }
 
-.hero__date {
-  position: absolute; left: 0; right: 0; top: 590px; z-index: 5;
-  padding: 0 24px;
+/* Top-right brand badge (緑円: 北海道最大級) */
+.hero__brand-badge {
+  position: absolute; left: 252px; top: 44px;
+  width: 140px; height: 131px;
+  z-index: 9;
+  background: #95FF00;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding-top: 8px;
+}
+.hero__brand-large {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 900; font-size: 20px;
+  line-height: 23px; text-align: center;
+  color: #010101;
+}
+.hero__brand-small {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 900; font-size: 12px;
+  line-height: 13.8px; text-align: center;
+  color: #010101;
+  margin-top: 6px;
+}
+
+/* メインタイトル (40px Black) */
+.hero__title {
+  position: absolute; left: 26px; top: 103px;
+  width: 320px;
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 900; font-size: 40px;
+  line-height: 46px;
   color: #fff;
+  z-index: 7;
+  letter-spacing: -1px;
+}
+.hero__title .t-loose { letter-spacing: 1.6px; }
+.hero__title .t-tight { letter-spacing: -1px; }
+
+/* サブタイトル (17px Roboto Bold opacity 0.5) */
+.hero__subtitle {
+  position: absolute; left: 26px; top: 205px;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 17px;
+  line-height: 21.25px;
+  color: #fff; opacity: .5;
+  z-index: 7;
+}
+
+/* 装飾 */
+.hero__deco { position: absolute; z-index: 5; }
+.hero__deco--tl { left: 14px;  top: 326px; width: 63px;  height: 55px; }
+.hero__deco--tr { left: 325px; top: 182px; width: 93px;  height: 105px; }
+.hero__deco--mr { left: 344px; top: 429px; width: 66px;  height: 59px; }
+
+/* ヒーローイラスト (中央) - 375x533 PNG */
+.hero__illust {
+  position: absolute; left: 0; top: 181px;
+  width: 375px; height: 533px;
+  z-index: 4;
+  object-fit: contain;
+}
+
+/* 日付エリア */
+.hero__date {
+  position: absolute; left: 0; right: 0; top: 0;
+  z-index: 7; pointer-events: none;
 }
 .hero__year {
+  position: absolute; left: 24px; top: 595px;
+  margin: 0;
   font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 20px; line-height: 1.15;
-  margin: 0; color: #fff;
-}
-.hero__dates-row {
-  display: flex; align-items: center; gap: 0;
-  margin-top: 4px; position: relative; min-height: 53px;
-}
-.hero__date-block { display: flex; align-items: baseline; gap: 0; }
-.hero__big-num {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 46px; line-height: 1;
-  color: #fff; letter-spacing: -1px;
-}
-.hero__slash {
-  display: inline-block; width: 16px; height: 33px;
-  background: #fff;
-  transform: rotate(20deg) translate(2px, 4px);
-  margin: 0 2px;
-  clip-path: polygon(60% 0, 100% 0, 40% 100%, 0 100%);
-}
-.hero__day {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 18px;
-  writing-mode: vertical-rl; text-orientation: upright;
-  margin-left: 2px; padding-bottom: 4px;
-  letter-spacing: 1px;
-}
-.hero__dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: #fff; margin: 0 8px; align-self: center;
-}
-.hero__free-badge {
-  position: relative; margin-left: auto; margin-right: 12px;
-  width: 99px; height: 92px;
-  display: flex; align-items: center; justify-content: center;
-}
-.hero__free-badge img {
-  position: absolute; inset: -12%; width: 124%; height: 124%; object-fit: contain;
-}
-.hero__free-text {
-  position: relative; z-index: 1;
-  font-weight: 900; font-size: 20px; line-height: 1.15;
-  color: #010101; text-align: center;
-  transform: rotate(12deg);
-}
-.hero__open {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 22px; line-height: 1.15;
-  margin: 18px 0 0; color: #fff;
-}
-
-.hero__venue {
-  margin-top: 24px;
-  display: flex; align-items: stretch; gap: 16px;
-}
-.hero__venue-label {
-  display: flex; align-items: center; gap: 6px;
-  flex-shrink: 0;
-}
-.hero__venue-line { width: 2px; height: 48px; background: #fff; }
-.hero__venue-text {
-  writing-mode: vertical-rl; text-orientation: upright;
-  font-weight: 700; font-size: 14px; letter-spacing: 4px;
+  font-weight: 700; font-size: 20px; line-height: 23px;
   color: #fff;
 }
-.hero__venue-name {
-  font-weight: 700; font-size: 16px; line-height: 1.6;
-  margin: 0; color: #fff;
+.hero__nine, .hero__nine2, .hero__five, .hero__six {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 46px; line-height: 52.9px;
+  color: #fff;
+}
+.hero__nine  { left: 24px;  top: 614px; }
+.hero__five  { left: 70px;  top: 614px; }
+.hero__nine2 { left: 143px; top: 614px; }
+.hero__six   { left: 189px; top: 614px; }
+.hero__slash {
+  position: absolute;
+  width: 16px; height: 33px;
+  background: #fff;
+  transform: skewX(-25deg);
+  border-radius: 0;
+}
+.hero__slash--1 { left: 51px;  top: 623px; }
+.hero__slash--2 { left: 170px; top: 623px; }
+.hero__day {
+  position: absolute;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 18px; line-height: 20.7px;
+  color: #fff;
+  transform-origin: top left;
+  transform: rotate(-90deg);
+  white-space: nowrap;
+}
+.hero__day--sat { left: 96px;  top: 661px; }
+.hero__day--sun { left: 215px; top: 659px; }
+.hero__dot {
+  position: absolute; left: 127px; top: 638px;
+  width: 6px; height: 6px;
+  background: #fff;
+}
+.hero__open {
+  position: absolute; left: 24px; top: 667px;
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 22px; line-height: 25.3px;
+  color: #fff;
 }
 
-.hero__cta {
-  position: absolute; left: 16px; right: 16px; bottom: 32px; z-index: 5;
-  display: flex; gap: 5px;
+/* 入場無料 badge */
+.hero__free {
+  position: absolute; left: 244px; top: 604px;
+  width: 99px; height: 92px;
+  pointer-events: auto;
 }
-.hero__cta .btn {
-  flex: 1; height: 49px; padding: 0; font-size: 16px;
+.hero__free img {
+  position: absolute; inset: -12% -10%;
+  width: 120%; height: 124%;
 }
+.hero__free-text {
+  position: absolute; left: 35px; top: 19px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 20px; line-height: 23px;
+  color: #010101; text-align: center;
+  transform: rotate(12deg); transform-origin: top left;
+  width: 49px;
+}
+
+/* 会場 (venue) */
+.hero__venue {
+  position: absolute; left: 0; right: 0; top: 701px;
+  z-index: 7; pointer-events: none;
+}
+.hero__venue-line {
+  position: absolute; width: 2px; height: 48px;
+  background: #fff;
+  top: 3px;
+}
+.hero__venue-line--l { left: 24px; }
+.hero__venue-line--r { left: 56px; }
+.hero__venue-label {
+  position: absolute; left: 34px; top: 8px;
+  width: 14px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 16px; line-height: 19.2px;
+  color: #fff; text-align: center;
+}
+.hero__venue-name {
+  position: absolute; left: 72px; top: 0;
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 16px; line-height: 25.6px;
+  color: #fff;
+  white-space: pre-wrap;
+}
+
+/* CTA buttons (Figma座標準拠) */
+.hero__btn {
+  position: absolute; top: 777px;
+  width: 169px; height: 49px;
+  border-radius: 999px;
+  z-index: 8;
+}
+.hero__btn--red {
+  left: 16px;
+  background: #f62343;
+}
+.hero__btn--gray {
+  left: 190px;
+  background: #d9d9d9;
+}
+.hero__btn-text {
+  position: absolute;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 18px; line-height: 20.7px;
+  color: #fff;
+  white-space: nowrap;
+}
+.hero__btn--red .hero__btn-text { left: 15px; top: 14px; }
+.hero__btn--gray .hero__btn-text { left: 15px; top: 14px; }
+.hero__btn-arrow {
+  position: absolute;
+  left: 129px; top: 10px;
+  width: 29px; height: 29px;
+  border-radius: 50%;
+  background: #fff;
+}
+.hero__btn-arrow::before, .hero__btn-arrow::after {
+  content: "";
+  position: absolute;
+  width: 6px; height: 1px;
+  background: #f62343;
+  left: 50%; top: 50%;
+}
+.hero__btn-arrow::before { transform: translate(-2px, -2px) rotate(45deg); }
+.hero__btn-arrow::after  { transform: translate(-2px, 2px) rotate(-45deg); }
+.hero__btn-arrow--dark::before, .hero__btn-arrow--dark::after { background: #000; }
 
 /* ============= PHOTO STRIP ============= */
-.photo-strip { background: #fff; }
-.photo-strip__row { display: flex; gap: 8px; height: 130px; }
+.photo-strip { background: #fff; padding-top: 53px; }
+.photo-strip__row { display: flex; gap: 8px; height: 130px; padding-left: 32px; }
+.photo-strip__row--bottom { padding-left: 0; padding-right: 28px; justify-content: flex-end; margin-top: 8px; }
 .photo-strip__photo {
-  width: 130px; height: 130px; flex-shrink: 0;
-  overflow: hidden;
+  width: 130px; height: 130px;
+  flex-shrink: 0; overflow: hidden;
 }
+.photo-strip__photo--wide {
+  width: 224px; height: 130px;
+}
+.photo-strip__row--bottom .photo-strip__photo--wide { width: 209px; }
 .photo-strip__photo img {
   width: 100%; height: 100%; object-fit: cover;
 }
-.photo-strip__color { flex: 1; height: 130px; }
-.photo-strip__color--brown { background: #c89e6a; }
-.photo-strip__color--gold { background: #c89e6a; }
 
 /* ============= ABOUT ============= */
-.about { padding: 40px 24px 24px; background: #fff; }
+.about { padding: 32px 24px 0; background: #fff; }
 .about__lead {
-  margin: 0; color: #000;
-  font-weight: 700; font-size: 24px; line-height: 1.6;
-  letter-spacing: -0.5px;
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 20px; line-height: 32px;
+  color: #fff;
+  text-align: center;
+  background: #0b0b0b;
+  padding: 24px;
+  margin-left: -24px;
+  margin-right: -24px;
+}
+/* 上のスタイル取り消し:背景は黒hero扱い、aboutは別 */
+.about { padding: 0; background: #0b0b0b; }
+.about__lead {
+  margin: 0;
+  padding: 32px 24px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 20px; line-height: 32px;
+  color: #fff;
+  text-align: center;
 }
 
 /* ============= TIMETABLE ============= */
 .timetable {
-  padding: 16px 24px 40px; background: #fff;
+  background: #0b0b0b;
+  padding: 0 24px 60px;
   display: flex; flex-direction: column; align-items: center; gap: 24px;
 }
 .timetable__text {
   margin: 0; align-self: stretch;
-  color: #000; font-size: 18px; line-height: 1.6;
-}
-.timetable .btn--outline {
-  width: 263px; font-size: 16px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
+  color: #fff; text-align: center;
 }
 
 /* ============= CONTENTS ============= */
 .contents {
   background: #292929;
   padding: 40px 24px 48px;
-  color: #fff;
 }
 .contents__lead {
+  width: 327px;
   margin: 24px 0 32px;
-  color: #fff; font-size: 18px; line-height: 1.6;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
+  color: #fff;
 }
 .contents__grid {
   display: grid;
   grid-template-columns: repeat(2, 156px);
   gap: 16px;
-  justify-content: center;
 }
 .content-card {
   position: relative;
   width: 156px; height: 250px;
   border-radius: 8px; overflow: hidden;
-  background: #1a1a1a;
+  background: #d9d9d9;
 }
 .content-card img {
   position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover;
 }
 .content-card__overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom,
-    rgba(0,0,0,0) 30%,
-    rgba(0,0,0,.5) 70%,
-    rgba(0,0,0,.85) 100%);
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 132px;
+  mix-blend-mode: multiply;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.6) 100%);
 }
 .content-card__body {
-  position: absolute; left: 12px; right: 12px; bottom: 12px;
+  position: absolute; left: 12px; right: 12px; bottom: 16px;
+  width: 132px;
   color: #fff;
 }
 .content-card__title {
-  font-weight: 700; font-size: 20px; line-height: 1.3;
   margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 20px; line-height: 26px;
 }
 .content-card__desc {
-  margin: 4px 0 0;
-  font-weight: 400; font-size: 14px; line-height: 1.4;
+  margin: 6px 0 0;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 14px; line-height: 19.6px;
 }
 
 /* ============= PARTICIPATE ============= */
 .participate {
   position: relative;
-  padding: 64px 24px 80px;
-  color: #fff;
-  overflow: hidden;
+  padding: 104px 24px 60px;
   background: #1a1a1a;
+  overflow: hidden;
 }
 .participate__bg {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: 0;
+  position: absolute; left: -18px; top: 0;
+  width: calc(100% + 36px); height: 820px;
+  object-fit: cover; z-index: 0;
 }
 .participate__overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom,
-    rgba(0,0,0,.55) 0%,
-    rgba(0,0,0,.55) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, rgba(0,0,0,.7) 100%);
   z-index: 1;
 }
 .participate > *:not(.participate__bg):not(.participate__overlay) {
   position: relative; z-index: 2;
 }
-.participate__head { color: #fff; }
+.participate__head .section-head__en,
+.participate__head .section-head__jp { color: #fff; }
 .participate__lead {
-  margin: 16px 0 32px;
-  font-size: 18px; line-height: 1.6;
+  width: 271px;
+  margin: 16px 0 80px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
+  color: #fff;
 }
 .entry-card {
   position: relative; z-index: 2;
-  background: rgba(255, 255, 255, .15);
-  backdrop-filter: blur(2px);
+  width: 327px; height: 201px;
+  background: rgba(255, 255, 255, .2);
   border-radius: 8px;
-  padding: 24px 16px;
-  text-align: center;
   margin-bottom: 16px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+  padding-top: 24px;
 }
 .entry-card:last-child { margin-bottom: 0; }
 .entry-card__title {
-  font-weight: 700; font-size: 24px;
-  margin: 0 0 8px;
-  letter-spacing: 1px;
+  margin: 0 0 12px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 20px; line-height: 32px;
+  color: #fff;
 }
 .entry-card__period {
   margin: 0 0 24px;
-  font-size: 16px; line-height: 1.6;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
+  color: #fff;
 }
-.entry-card__btn {
-  width: 263px; max-width: 100%;
-  margin: 0 auto;
-}
-.entry-card__btn[disabled] { cursor: not-allowed; }
+.entry-card__btn { width: 263px; height: 49px; }
 
 /* ============= ARCHIVE ============= */
 .archive {
@@ -373,10 +499,11 @@ ul { list-style: none; padding: 0; margin: 0; }
 .archive .section-head { padding: 0 24px; }
 .archive__lead {
   margin: 16px 24px 24px;
-  font-size: 18px; line-height: 1.6;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
 }
 .archive__scroll {
-  display: flex; gap: 0;
+  display: flex;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -387,6 +514,7 @@ ul { list-style: none; padding: 0; margin: 0; }
   flex-shrink: 0;
   width: 241px; height: 362px;
   scroll-snap-align: start;
+  background: #d9d9d9;
 }
 .archive__photo img {
   width: 100%; height: 100%; object-fit: cover;
@@ -396,66 +524,82 @@ ul { list-style: none; padding: 0; margin: 0; }
   padding: 16px 24px 0;
 }
 .archive__btn {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-flex; align-items: center; gap: 6px;
+  width: 85px; height: 29px;
   border: 1px solid #fff;
-  border-radius: 999px;
-  padding: 6px 16px;
-  color: #fff; font-weight: 700; font-size: 14px;
-  letter-spacing: 1px;
+  border-radius: 9999px;
+  padding: 0 12px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700; font-size: 14px; line-height: 22.4px;
+  color: #fff;
+  justify-content: center;
 }
 .archive__btn-icon {
-  display: inline-block; width: 8px; height: 8px;
-  background: #fff;
+  display: inline-flex; gap: 3px;
 }
-.archive__btn[data-state="play"] .archive__btn-icon {
+.archive__btn-icon::before, .archive__btn-icon::after {
+  content: ""; display: block; width: 2px; height: 8px; background: #fff;
+}
+.archive__btn[data-state="play"] .archive__btn-icon::before {
   width: 0; height: 0;
+  border-left: 6px solid #fff;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
   background: transparent;
-  border-left: 8px solid #fff;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
 }
+.archive__btn[data-state="play"] .archive__btn-icon::after { display: none; }
 
 /* ============= FAQ ============= */
 .faq {
   background: #f5f5f5;
   padding: 40px 24px;
 }
+.faq .section-head__en,
+.faq .section-head__jp { width: 168px; }
 .faq__tabs {
-  display: flex; margin: 24px 0 0;
+  display: flex; margin: 32px 0 32px;
+  background: #f5f5f5;
 }
 .faq__tab {
-  flex: 1; padding: 8px 0;
-  font-weight: 700; font-size: 18px;
+  flex: 1; padding: 0 0 8px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 18px; line-height: 28.8px;
   color: rgba(0,0,0,.3);
   border-bottom: 2px solid transparent;
+  text-align: center;
   transition: color .2s, border-color .2s;
 }
 .faq__tab--active {
   color: #000;
   border-color: #333;
 }
-.faq__list { margin-top: 32px; }
+.faq__list { width: 327px; }
 .faq__item {
+  padding-bottom: 16px;
   border-bottom: 1px solid rgba(194,194,194,.5);
+  margin-bottom: 0;
 }
 .faq__question {
-  display: flex; align-items: flex-start; gap: 8px;
+  display: flex; align-items: flex-start;
+  gap: 8px;
   width: 100%;
-  padding: 16px 0;
+  padding: 16px 0 16px;
   text-align: left;
 }
 .faq__q {
   flex-shrink: 0;
-  width: 31px; height: 31px; border-radius: 50%;
-  background: #cefb4d;
+  width: 31px; height: 31px;
+  border-radius: 9999px;
+  background: #95FF00;
   display: inline-flex; align-items: center; justify-content: center;
-  font-family: "Nunito Sans", "Roboto", sans-serif;
-  font-weight: 700; font-size: 14px;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700; font-size: 14px; line-height: 22.4px;
   color: #000;
 }
 .faq__text {
-  flex: 1;
-  font-weight: 700; font-size: 16px; line-height: 1.6;
+  flex: 1; width: 266px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 16px; line-height: 25.6px;
   color: #000;
   padding-top: 4px;
 }
@@ -469,9 +613,9 @@ ul { list-style: none; padding: 0; margin: 0; }
   content: ""; position: absolute;
   background: #000;
 }
-.faq__icon::before { left: 0; right: 0; top: 6.5px; height: 1px; }
-.faq__icon::after { top: 0; bottom: 0; left: 6.5px; width: 1px; transition: transform .25s; }
-.faq__item[data-open="true"] .faq__icon::after { transform: scaleY(0); }
+.faq__icon::before { left: 0; right: 0; top: 50%; height: 1px; transform: translateY(-50%); }
+.faq__icon::after  { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); transition: transform .25s; }
+.faq__item[data-open="true"] .faq__icon::after { transform: translateX(-50%) scaleY(0); }
 .faq__answer {
   max-height: 0; overflow: hidden;
   transition: max-height .3s ease, padding .3s ease;
@@ -479,7 +623,8 @@ ul { list-style: none; padding: 0; margin: 0; }
 .faq__answer p {
   margin: 0;
   padding: 0 0 16px 39px;
-  font-size: 14px; line-height: 1.7;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 14px; line-height: 22.4px;
   color: #333;
 }
 .faq__item[data-open="true"] .faq__answer { max-height: 200px; }
@@ -489,35 +634,48 @@ ul { list-style: none; padding: 0; margin: 0; }
   background: #fff;
   padding: 40px 24px 48px;
 }
+.access .section-head__en,
+.access .section-head__jp { width: 195px; }
 .access__venue {
-  font-weight: 700; font-size: 24px; line-height: 1.6;
   margin: 24px 0 16px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 20px; line-height: 32px;
+  color: #000;
 }
 .access__address {
-  font-size: 18px; line-height: 1.6;
   margin: 0 0 24px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
+  color: #000;
 }
 .access__map {
-  width: 100%; height: 168px;
+  width: 327px; height: 168px;
   border-radius: 8px; overflow: hidden;
   margin-bottom: 32px;
+  background: #d9d9d9;
 }
 .access__map img {
   width: 100%; height: 100%; object-fit: cover;
 }
-.access__list { display: flex; flex-direction: column; gap: 16px; }
+.access__list { width: 327px; display: flex; flex-direction: column; gap: 16px; }
 .access__item-head {
-  display: flex; align-items: center; gap: 4px;
-  margin-bottom: 4px;
+  display: flex; align-items: flex-start; gap: 4px;
+  margin-bottom: 0;
 }
-.access__item-head img { width: 26px; height: 26px; }
+.access__item-head img { width: 26px; height: 26px; opacity: .8; }
 .access__item-head span {
-  font-weight: 700; font-size: 18px; color: #000;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 16px; line-height: 25.6px;
+  color: #000;
 }
 .access__item p {
   margin: 0;
-  font-size: 16px; line-height: 1.6;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
   color: #000;
+}
+.access__item p strong {
+  font-weight: 700;
 }
 
 /* ============= FOLLOW ============= */
@@ -527,24 +685,32 @@ ul { list-style: none; padding: 0; margin: 0; }
   text-align: center;
 }
 .follow__title {
-  font-family: "Nunito Sans", "Roboto", sans-serif;
-  font-weight: 700; font-size: 24px;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 16px;
   margin: 0;
-  display: inline-flex; align-items: center; gap: 16px;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700; font-size: 24px; line-height: 38.4px;
+  color: #000;
 }
 .follow__bracket {
-  font-size: 22px; line-height: 1;
+  display: inline-block;
+  width: 11px; height: 19px;
+  background: #000;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
+.follow__bracket--l { transform: scaleX(-1); }
 .follow__lead {
   margin: 16px 0 24px;
-  font-size: 16px; line-height: 1.6;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
+  color: #000;
 }
 .follow__link {
-  display: inline-flex; align-items: center; gap: 12px;
+  display: inline-flex; align-items: center; gap: 8px;
   width: 263px; height: 76px;
-  background: #000; border-radius: 24px;
-  padding: 0 16px;
-  color: #fff;
+  background: #000;
+  border-radius: 24px;
+  padding: 8px 16px;
 }
 .follow__avatar {
   width: 60px; height: 60px;
@@ -553,37 +719,59 @@ ul { list-style: none; padding: 0; margin: 0; }
   flex-shrink: 0;
 }
 .follow__handle {
-  font-family: "Nunito Sans", "Roboto", sans-serif;
-  font-weight: 700; font-size: 16px;
-  flex: 1; text-align: left;
+  flex: 1;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700; font-size: 16px; line-height: 25.6px;
+  color: #fff;
+  text-align: left;
 }
-.follow__icon { width: 29px; height: 29px; flex-shrink: 0; }
+.follow__icon {
+  position: relative;
+  width: 29px; height: 29px;
+  border-radius: 50%;
+  background: #fff;
+  flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.follow__arrow {
+  display: inline-block;
+  width: 6px; height: 4px;
+  border: 1px solid #000;
+  border-top: none; border-right: none;
+  transform: rotate(-135deg);
+}
 
 /* ============= CONTACT ============= */
 .contact {
   background: #fff;
   padding: 40px 24px 64px;
 }
+.contact .section-head__en,
+.contact .section-head__jp { width: 195px; }
 .contact__lead {
   margin: 24px 0 32px;
-  font-size: 16px; line-height: 1.6;
+  width: 327px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
+  color: #000;
 }
 .contact__form {
   display: flex; flex-direction: column; gap: 24px;
 }
-.contact__field { display: flex; flex-direction: column; gap: 12px; }
+.contact__field { display: flex; flex-direction: column; gap: 16px; }
 .contact__field label {
-  font-weight: 700; font-size: 18px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 700; font-size: 16px; line-height: 25.6px;
   color: #000;
 }
 .contact__field input,
 .contact__field textarea {
-  font-family: inherit;
-  width: 100%;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400; font-size: 16px; line-height: 25.6px;
+  width: 327px;
   border: 1px solid #c8c8c8;
   border-radius: 4px;
   padding: 12px 16px;
-  font-size: 18px; line-height: 1.6;
   color: #000; background: #fff;
   outline: none;
   transition: border-color .2s;
@@ -611,18 +799,13 @@ ul { list-style: none; padding: 0; margin: 0; }
 /* ============= Lazy load fade-in ============= */
 .lazy-fade {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(16px);
   transition: opacity .8s ease, transform .8s ease;
 }
 .lazy-fade.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* ============= Responsive (desktop) ============= */
-@media (min-width: 768px) {
-  body { background: #1a1a1a; }
-  .page {
-    box-shadow: 0 0 40px rgba(0,0,0,.5);
-  }
+img[loading="lazy"] {
+  transition: opacity .5s ease;
 }
