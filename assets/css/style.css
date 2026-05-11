@@ -394,61 +394,69 @@ body.menu-open .site-menu {
   object-fit: contain;
 }
 
-/* 日付エリア */
+/* 日付エリア (flex stack) */
 .hero__date {
-  position: absolute; left: 0; right: 0; top: 0;
-  z-index: 7; pointer-events: none;
-}
-.hero__year {
-  position: absolute; left: 24px; top: 595px;
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 20px; line-height: 23px;
-  color: #fff;
-}
-.hero__nine, .hero__nine2, .hero__five, .hero__six {
   position: absolute;
+  left: 24px;
+  top: 595px;
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
   font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 46px; line-height: 52.9px;
-  color: #fff;
-}
-.hero__nine  { left: 24px;  top: 614px; }
-.hero__five  { left: 78px;  top: 614px; }
-.hero__nine2 { left: 156px; top: 614px; }
-.hero__six   { left: 210px; top: 614px; }
-.hero__slash {
-  position: absolute;
-  width: 16px; height: 33px;
-  object-fit: contain;
+  font-weight: 700;
+  color: var(--c-white);
   pointer-events: none;
 }
-.hero__slash--1 { left: 56px;  top: 623px; }
-.hero__slash--2 { left: 190px; top: 623px; }
-.hero__day {
-  position: absolute;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 18px; line-height: 20.7px;
-  color: #fff;
-  transform-origin: top left;
-  transform: rotate(-90deg);
-  white-space: nowrap;
+.hero__year {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1;
 }
-.hero__day--sat { left: 116px; top: 667px; }
-.hero__day--sun { left: 250px; top: 667px; }
+.hero__dates {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 240px; /* Figma: 9 → SUN right edge = 240 */
+  margin: 0;
+  line-height: 1;
+}
+.hero__digit {
+  font-size: 46px;
+  line-height: 1;
+}
+.hero__slash {
+  width: 16px;
+  aspect-ratio: 16 / 33;
+  align-self: center;
+  object-fit: contain;
+}
+.hero__day {
+  display: inline-block;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  font-size: 18px;
+  /* line-height = 0.78 で縦書きの column 幅を 14px に縮める (Figma 準拠) */
+  line-height: calc(14 / 18);
+  letter-spacing: 0;
+  /* digit のディセンダー分を補正して baseline に揃える */
+  margin-bottom: 0.3em;
+}
 .hero__dot {
-  position: absolute; left: 139px; top: 638px;
-  width: 6px; height: 6px;
-  background: #fff;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--c-white);
+  align-self: center;
 }
 .hero__open {
-  position: absolute; left: 24px; top: 667px;
-  margin: 0;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 22px; line-height: 25.3px;
-  color: #fff;
+  margin: 4px 0 0;
+  font-size: 22px;
+  line-height: 1;
 }
 
-/* 入場無料 badge */
+/* 入場無料 badge (ヒーロー右下、ダンサーの足に重ねる) */
 .hero__free {
   position: absolute;
   left: 272px;
@@ -456,6 +464,7 @@ body.menu-open .site-menu {
   width: 92px;
   height: 86px;
   pointer-events: none;
+  z-index: 8;
 }
 .hero__free img {
   width: 100%;
@@ -1318,23 +1327,17 @@ img[loading="lazy"] {
   /* Illustration: top:181 → 181-65=116 */
   .hero__illust { top: 30.93vw; width: 100%; height: auto; aspect-ratio: 375 / 533; }
 
-  /* Date: year top:595 → 530 / digits top:614 → 549 */
-  .hero__year { left: 6.4%; top: 141.33vw; font-size: 5.33vw; }
-  .hero__nine, .hero__nine2, .hero__five, .hero__six { font-size: 12.27vw; }
-  .hero__nine  { left: 6.4%;   top: 146.4vw; }
-  .hero__five  { left: 20.8%;  top: 146.4vw; }
-  .hero__nine2 { left: 41.6%;  top: 146.4vw; }
-  .hero__six   { left: 56%;    top: 146.4vw; }
-  .hero__slash { width: 4.27%; height: auto; aspect-ratio: 16 / 33; }
-  .hero__slash--1 { left: 14.93%; top: 148.8vw; }
-  .hero__slash--2 { left: 50.67%; top: 148.8vw; }
-  .hero__day { font-size: 4.8vw; }
-  .hero__day--sat { left: 30.93%; top: 160.53vw; }
-  .hero__day--sun { left: 66.67%; top: 160.53vw; }
-  .hero__dot  { left: 37.07%; top: 152.8vw; }
-  .hero__open { left: 6.4%; top: 160.53vw; font-size: 5.87vw; }
+  /* Date area (flex stack scales via children) */
+  .hero__date { left: 6.4%; top: 141.33vw; }
+  .hero__year  { font-size: 5.33vw; }
+  .hero__dates { width: 64vw; /* = 240/375 */ }
+  .hero__digit { font-size: 12.27vw; }
+  .hero__slash { width: 4.27vw; }
+  .hero__day   { font-size: 4.8vw; }
+  .hero__dot   { width: 1.6vw; height: 1.6vw; }
+  .hero__open  { font-size: 5.87vw; }
 
-  /* 入場無料 badge: left:234 top:592 → 527 */
+  /* 入場無料 badge: ヒーロー右下に重ねる */
   .hero__free {
     left: auto;
     right: 3.2%;
