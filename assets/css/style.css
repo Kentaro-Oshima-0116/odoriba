@@ -783,6 +783,10 @@ body.menu-open .site-menu {
   margin-inline: auto;
 }
 .content-card {
+  --card-img-x: 0;
+  --card-img-y: 0;
+  --card-img-w: 100%;
+  --card-img-h: 100%;
   position: relative;
   width: 100%; height: 250px;
   border-radius: 8px; overflow: hidden;
@@ -790,32 +794,36 @@ body.menu-open .site-menu {
 }
 .content-card img {
   position: absolute;
+  left: var(--card-img-x);
+  top: var(--card-img-y);
+  width: var(--card-img-w);
+  height: var(--card-img-h);
   max-width: none;
   object-fit: cover;
 }
-.content-card:nth-child(1) img {
-  left: -24px;
-  top: -14px;
-  width: 277px;
-  height: 291px;
+.content-card--showcase {
+  --card-img-x: -24px;
+  --card-img-y: -14px;
+  --card-img-w: 277px;
+  --card-img-h: 291px;
 }
-.content-card:nth-child(2) img {
-  left: -29px;
-  top: -75px;
-  width: 263px;
-  height: 393px;
+.content-card--battle {
+  --card-img-x: -29px;
+  --card-img-y: -75px;
+  --card-img-w: 263px;
+  --card-img-h: 393px;
 }
-.content-card:nth-child(3) img {
-  left: -206px;
-  top: -50px;
-  width: 507px;
-  height: 339px;
+.content-card--food {
+  --card-img-x: -206px;
+  --card-img-y: -50px;
+  --card-img-w: 507px;
+  --card-img-h: 339px;
 }
-.content-card:nth-child(4) img {
-  left: -201px;
-  top: -29px;
-  width: 489px;
-  height: 325px;
+.content-card--market {
+  --card-img-x: -201px;
+  --card-img-y: -29px;
+  --card-img-w: 489px;
+  --card-img-h: 325px;
 }
 .content-card__overlay {
   position: absolute; left: 0; right: 0; bottom: 0;
