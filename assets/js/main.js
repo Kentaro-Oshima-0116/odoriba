@@ -54,6 +54,38 @@
     );
   });
 
+  // ============ Hero CTA follow (mobile/tablet only) ============
+  const heroCta = document.getElementById('heroCta');
+
+  if (heroCta) {
+    const revealOffset = 80;
+    let ticking = false;
+
+    const updateHeroCta = () => {
+      if (window.innerWidth >= 1024) {
+        heroCta.classList.remove('is-visible');
+        return;
+      }
+
+      heroCta.classList.toggle('is-visible', window.scrollY > revealOffset);
+    };
+
+    updateHeroCta();
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+          updateHeroCta();
+          ticking = false;
+        });
+      },
+      { passive: true }
+    );
+    window.addEventListener('resize', updateHeroCta);
+  }
+
   // ============ FAQ accordion ============
   const faqItems = document.querySelectorAll('.faq__item');
   faqItems.forEach((item) => {
