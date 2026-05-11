@@ -1014,7 +1014,7 @@ body.menu-open .site-menu {
   display: flex;
   width: max-content;
   will-change: transform;
-  animation: archive-marquee 24s linear infinite;
+  animation: archive-marquee var(--archive-loop-duration, 24s) linear infinite;
 }
 .archive__scroll[data-state="paused"] .archive__track {
   animation-play-state: paused;
@@ -1060,7 +1060,7 @@ body.menu-open .site-menu {
 .archive__btn[data-state="play"] .archive__btn-icon::after { display: none; }
 @keyframes archive-marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-241px); }
+  to { transform: translateX(calc(-1 * var(--archive-loop-width, 241px))); }
 }
 
 /* ============= FAQ ============= */

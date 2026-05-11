@@ -11,7 +11,7 @@
 
   // ============ Intersection Observer (fade-in on scroll) ============
   const fadeTargets = document.querySelectorAll(
-    '.section-head, .content-card, .entry-card, .archive__photo, .faq__item, .access__item, .about__lead, .contents__lead, .timetable__text, .archive__lead, .contact__link, .follow__link'
+    '.section-head, .content-card, .entry-card, .faq__item, .access__item, .about__lead, .contents__lead, .timetable__text, .archive__lead, .contact__link, .follow__link'
   );
   fadeTargets.forEach((el) => el.classList.add('lazy-fade'));
 
@@ -119,9 +119,16 @@
     archiveScroll.dataset.state = 'playing';
 
     const photoItems = Array.from(archiveTrack.children);
+    const loopWidth = photoItems.reduce((total, item) => total + item.getBoundingClientRect().width, 0);
+    if (loopWidth > 0) {
+      archiveTrack.style.setProperty('--archive-loop-width', `${loopWidth}px`);
+      archiveTrack.style.setProperty('--archive-loop-duration', `${(loopWidth / 10).toFixed(2)}s`);
+    }
+
     photoItems.forEach((item) => {
       const clone = item.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
+      clone.classList.remove('lazy-fade', 'is-visible');
       archiveTrack.appendChild(clone);
     });
 
