@@ -400,8 +400,8 @@ body.menu-open .site-menu {
   transform: rotate(-90deg);
   white-space: nowrap;
 }
-.hero__day--sat { left: 116px; top: 659px; }
-.hero__day--sun { left: 250px; top: 659px; }
+.hero__day--sat { left: 116px; top: 667px; }
+.hero__day--sun { left: 250px; top: 667px; }
 .hero__dot {
   position: absolute; left: 139px; top: 638px;
   width: 6px; height: 6px;
@@ -1306,8 +1306,8 @@ img[loading="lazy"] {
   .hero__slash--1 { left: 14.93%; top: 148.8vw; }
   .hero__slash--2 { left: 50.67%; top: 148.8vw; }
   .hero__day { font-size: 4.8vw; }
-  .hero__day--sat { left: 30.93%; top: 158.4vw; }
-  .hero__day--sun { left: 66.67%; top: 158.4vw; }
+  .hero__day--sat { left: 30.93%; top: 160.53vw; }
+  .hero__day--sun { left: 66.67%; top: 160.53vw; }
   .hero__dot  { left: 37.07%; top: 152.8vw; }
   .hero__open { left: 6.4%; top: 160.53vw; font-size: 5.87vw; }
 
