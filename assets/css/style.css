@@ -855,25 +855,28 @@ body.menu-open .site-menu {
   background: #1a1a1a;
   overflow: hidden;
 }
-.participate__bg {
+.participate__backdrop {
   position: absolute;
   inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.participate__bg {
   width: 100%;
   height: 100%;
   max-width: none;
   object-fit: cover;
   object-position: center center;
-  z-index: 0;
 }
 .participate__overlay {
   position: absolute; inset: 0;
   background:
     linear-gradient(180deg, #000 0, rgba(0,0,0,0) 233px),
     linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.58) 100%);
-  z-index: 1;
 }
-.participate > *:not(.participate__bg):not(.participate__overlay) {
-  position: relative; z-index: 2;
+.participate__content {
+  position: relative;
+  z-index: 1;
 }
 .participate__head {
   width: var(--content-width);

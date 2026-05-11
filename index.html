@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&family=Nunito+Sans:wght@700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/css/style.css?v=20260512-39" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260512-40" />
 </head>
 <body>
 
@@ -236,31 +236,35 @@
 
     <!-- ================== PARTICIPATE (写真背景つき) ================== -->
     <section class="participate" id="participate">
-      <img class="participate__bg" src="assets/images/hero-bg2.jpg" alt="" loading="lazy" decoding="async" />
-      <div class="participate__overlay"></div>
-
-      <header class="section-head section-head--light participate__head">
-        <p class="section-head__en">Participate</p>
-        <h2 class="section-head__jp">参加する</h2>
-      </header>
-      <p class="participate__lead">ショーケース・バトル、<br />どちらへの参加も受け付けています。</p>
-
-      <div class="entry-block">
-        <a href="#" class="entry-card entry-card--team">
-          <span class="entry-card__title">チームエントリー</span>
-          <span class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</span>
-          <span class="entry-card__arrow"></span>
-        </a>
-        <a href="#" class="entry-doc-link">チーム申込説明書はこちら</a>
+      <div class="participate__backdrop" aria-hidden="true">
+        <img class="participate__bg" src="assets/images/hero-bg2.jpg" alt="" loading="lazy" decoding="async" />
+        <div class="participate__overlay"></div>
       </div>
 
-      <div class="entry-block">
-        <a href="#" class="entry-card entry-card--personal" aria-disabled="true">
-          <span class="entry-card__title">個人エントリー</span>
-          <span class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</span>
-          <span class="entry-card__arrow"></span>
-        </a>
-        <a href="#" class="entry-doc-link">個人申込説明書はこちら</a>
+      <div class="participate__content">
+        <header class="section-head section-head--light participate__head">
+          <p class="section-head__en">Participate</p>
+          <h2 class="section-head__jp">参加する</h2>
+        </header>
+        <p class="participate__lead">ショーケース・バトル、<br />どちらへの参加も受け付けています。</p>
+
+        <div class="entry-block">
+          <a href="#" class="entry-card entry-card--team">
+            <span class="entry-card__title">チームエントリー</span>
+            <span class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</span>
+            <span class="entry-card__arrow"></span>
+          </a>
+          <a href="#" class="entry-doc-link">チーム申込説明書はこちら</a>
+        </div>
+
+        <div class="entry-block">
+          <a href="#" class="entry-card entry-card--personal" aria-disabled="true">
+            <span class="entry-card__title">個人エントリー</span>
+            <span class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</span>
+            <span class="entry-card__arrow"></span>
+          </a>
+          <a href="#" class="entry-doc-link">個人申込説明書はこちら</a>
+        </div>
       </div>
     </section>
 
