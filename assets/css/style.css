@@ -354,30 +354,34 @@ body.menu-open .site-menu {
   margin-top: 6px;
 }
 
-/* メインタイトル (40px Black) */
-.hero__title {
-  position: absolute; left: 26px; top: 103px;
+/* ヒーロー見出し (タイトル + サブタイトル) */
+.hero__heading {
+  position: absolute;
+  left: 26px;
+  top: 103px;
   width: 320px;
+  z-index: 7;
+  pointer-events: none;
+}
+.hero__title {
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 900; font-size: 40px;
+  font-weight: 900;
+  font-size: 40px;
   line-height: 46px;
   color: #fff;
-  z-index: 7;
   letter-spacing: -1px;
 }
 .hero__title .t-loose { letter-spacing: 1.6px; }
 .hero__title .t-tight { letter-spacing: -1px; }
-
-/* サブタイトル (17px Roboto Bold opacity 0.5) */
 .hero__subtitle {
-  position: absolute; left: 26px; top: 205px;
-  margin: 0;
+  margin: 10px 0 0;
   font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 17px;
-  line-height: 21.25px;
-  color: #fff; opacity: .5;
-  z-index: 7;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.25; /* Figma: 125% */
+  color: #fff;
+  opacity: .5;
 }
 
 /* 装飾 */
@@ -417,10 +421,14 @@ body.menu-open .site-menu {
 .hero__dates {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  width: 240px; /* Figma: 9 → SUN right edge = 240 */
+  gap: 10px; /* 「9/5 SAT」⇔ ・ ⇔「9/6 SUN」 */
   margin: 0;
   line-height: 1;
+}
+.hero__date-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
 }
 .hero__digit {
   font-size: 46px;
@@ -448,6 +456,7 @@ body.menu-open .site-menu {
   width: 6px;
   height: 6px;
   background: var(--c-white);
+  border-radius: 50%;
   align-self: center;
 }
 .hero__open {
@@ -459,7 +468,7 @@ body.menu-open .site-menu {
 /* 入場無料 badge (ヒーロー右下、ダンサーの足に重ねる) */
 .hero__free {
   position: absolute;
-  left: 272px;
+  left: 242px;
   top: 590px;
   width: 92px;
   height: 86px;
@@ -478,37 +487,46 @@ body.menu-open .site-menu {
   justify-content: center;
   transform: rotate(8deg);
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 1.12;
-  color: #000;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.15; /* Figma: 115% */
+  color: #010101;
   text-align: center;
 }
 
 /* 会場 (venue) */
 .hero__venue {
-  position: absolute; left: 0; right: 0; top: 701px;
-  z-index: 7; pointer-events: none;
+  position: absolute;
+  left: 24px;
+  top: 701px;
+  display: flex;
+  align-items: center;
+  z-index: 7;
+  pointer-events: none;
 }
 .hero__venue-line {
-  position: absolute; width: 2px; height: 48px;
+  flex-shrink: 0;
+  width: 2px;
+  height: 48px;
   background: #fff;
-  top: 3px;
 }
-.hero__venue-line--l { left: 24px; }
-.hero__venue-line--r { left: 56px; }
 .hero__venue-label {
-  position: absolute; left: 34px; top: 8px;
+  flex-shrink: 0;
   width: 14px;
+  margin: 0 8px;
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 700; font-size: 16px; line-height: 19.2px;
-  color: #fff; text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: #fff;
+  text-align: center;
 }
 .hero__venue-name {
-  position: absolute; left: 72px; top: 0;
-  margin: 0;
+  margin: 0 0 0 16px;
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 700; font-size: 16px; line-height: 1.35;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.35;
   color: #fff;
   white-space: pre-wrap;
 }
@@ -1309,15 +1327,10 @@ img[loading="lazy"] {
   .hero__brand-large { font-size: 5.33vw; line-height: 1.15; }
   .hero__brand-small { font-size: 3.2vw;  line-height: 1.15; }
 
-  /* Title: left:26 top:103 → 103-65=38 */
-  .hero__title {
-    left: 6.93%; top: 10.13vw;
-    width: 85.33%;
-    font-size: 10.67vw; line-height: 1.15;
-  }
-
-  /* Subtitle: left:26 top:205 → 205-65=140 */
-  .hero__subtitle { left: 6.93%; top: 37.33vw; font-size: 4.53vw; }
+  /* Heading: title + subtitle wrapper */
+  .hero__heading { left: 6.93%; top: 10.13vw; width: 85.33%; }
+  .hero__title { font-size: 10.67vw; line-height: 1.15; }
+  .hero__subtitle { margin-top: 2.67vw; font-size: 4.53vw; }
 
   /* Decorations */
   .hero__deco--tl { left: 3.73%;  top: 69.6vw;  width: 16.8%;  height: auto; aspect-ratio: 63 / 55; }
@@ -1330,27 +1343,39 @@ img[loading="lazy"] {
   /* Date area (flex stack scales via children) */
   .hero__date { left: 6.4%; top: 141.33vw; }
   .hero__year  { font-size: 5.33vw; }
-  .hero__dates { width: 64vw; /* = 240/375 */ }
+  .hero__dates       { gap: 2.67vw; /* = 10/375 */ }
+  .hero__date-group  { gap: 1.07vw; /* = 4/375 */ }
   .hero__digit { font-size: 12.27vw; }
   .hero__slash { width: 4.27vw; }
   .hero__day   { font-size: 4.8vw; }
   .hero__dot   { width: 1.6vw; height: 1.6vw; }
   .hero__open  { font-size: 5.87vw; }
 
-  /* 入場無料 badge: ヒーロー右下に重ねる */
+  /* 入場無料 badge: ヒーロー右下に重ねる (SUN の 8px 右) */
   .hero__free {
     left: auto;
-    right: 3.2%;
+    right: 10.93%;
     top: 140.53vw;
     width: 24.53%;
     height: auto;
     aspect-ratio: 99 / 92;
   }
-  .hero__free span { font-size: 6.4vw; }
+  .hero__free span { font-size: 5.33vw; /* = 20/375 */ }
 
-  /* Venue: top:701 → 636 */
-  .hero__venue     { top: 169.6vw; }
-  .hero__venue-name { font-size: 4.27vw; line-height: 1.35; }
+  /* Venue */
+  .hero__venue { left: 6.4%; top: 169.6vw; }
+  .hero__venue-line { height: 12.8vw; }
+  .hero__venue-label {
+    width: 3.73vw;
+    margin: 0 2.13vw;
+    font-size: 4.27vw;
+    line-height: 1.2;
+  }
+  .hero__venue-name {
+    margin-left: 4.27vw;
+    font-size: 4.27vw;
+    line-height: 1.35;
+  }
 
   /* CTA: 会場下の所定位置に配置 */
   .hero__cta {
