@@ -634,9 +634,13 @@ body.menu-open .site-menu {
 .hero__btn-arrow--dark::before { background: #000; }
 .hero__btn-arrow--dark::after { border-color: #000; }
 
-/* ============= PHOTO STRIP ============= */
-.photo-strip {
+/* ============= INTRO ============= */
+.intro {
   background: #0b0b0b;
+  color: #fff;
+}
+
+.photo-strip {
   margin-top: -12px;
   padding-top: 0;
 }
@@ -656,47 +660,51 @@ body.menu-open .site-menu {
   transform: translateX(-16px);
 }
 .photo-strip__photo {
-  width: 130px; height: 130px;
-  flex-shrink: 0; overflow: hidden;
+  --photo-x: 0;
+  --photo-y: 0;
+  --photo-w: 100%;
+  --photo-h: 100%;
+  width: 130px;
+  height: 130px;
+  flex-shrink: 0;
+  overflow: hidden;
   position: relative;
 }
 .photo-strip__photo--wide {
   width: 224px; height: 130px;
 }
-.photo-strip__row--bottom .photo-strip__photo--wide { width: 209px; }
+.photo-strip__photo--bottom-wide { width: 209px; }
+.photo-strip__photo--top-left {
+  --photo-x: -35px;
+  --photo-y: -54px;
+  --photo-w: 184px;
+  --photo-h: 275px;
+}
+.photo-strip__photo--bottom-wide {
+  --photo-x: -18px;
+  --photo-y: -27px;
+  --photo-w: 260px;
+  --photo-h: 174px;
+}
+.photo-strip__photo--bottom-right {
+  --photo-x: -8px;
+  --photo-y: -64px;
+  --photo-w: 142px;
+  --photo-h: 212px;
+}
 .photo-strip__photo img {
   position: absolute;
+  left: var(--photo-x);
+  top: var(--photo-y);
+  width: var(--photo-w);
+  height: var(--photo-h);
   max-width: none;
   object-fit: cover;
-}
-.photo-strip__row--top .photo-strip__photo:first-child img {
-  left: -35px;
-  top: -54px;
-  width: 184px;
-  height: 275px;
-}
-.photo-strip__row--top .photo-strip__photo--wide img {
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.photo-strip__row--bottom .photo-strip__photo--wide img {
-  left: -18px;
-  top: -27px;
-  width: 260px;
-  height: 174px;
-}
-.photo-strip__row--bottom .photo-strip__photo:not(.photo-strip__photo--wide) img {
-  left: -8px;
-  top: -64px;
-  width: 142px;
-  height: 212px;
 }
 
 /* ============= ABOUT ============= */
 .about {
   padding: 0;
-  background: #0b0b0b;
 }
 .about__lead {
   margin: 0;
@@ -709,7 +717,6 @@ body.menu-open .site-menu {
 
 /* ============= TIMETABLE ============= */
 .timetable {
-  background: #0b0b0b;
   padding: 0 24px 40px;
   display: flex; flex-direction: column; align-items: center; gap: 24px;
 }
