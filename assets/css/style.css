@@ -355,13 +355,18 @@ body.menu-open .site-menu {
 }
 
 /* ヒーロー見出し (タイトル + サブタイトル) */
-.hero__heading {
-  position: absolute;
-  left: 26px;
-  top: 103px;
-  width: 320px;
+.hero__stack {
+  position: relative;
   z-index: 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 103px 0 0;
   pointer-events: none;
+}
+.hero__heading {
+  width: 320px;
+  margin-left: 26px;
 }
 .hero__title {
   margin: 0;
@@ -400,14 +405,12 @@ body.menu-open .site-menu {
 
 /* 日付エリア (flex stack) */
 .hero__date {
-  position: absolute;
-  left: 24px;
-  top: 595px;
-  z-index: 7;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
+  margin-top: 348px;
+  margin-left: 24px;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   color: var(--c-white);
@@ -500,12 +503,10 @@ body.menu-open .site-menu {
 
 /* 会場 (venue) */
 .hero__venue {
-  position: absolute;
-  left: 24px;
-  top: 701px;
   display: flex;
   align-items: center;
-  z-index: 7;
+  margin-top: 14px;
+  margin-left: 24px;
   pointer-events: none;
 }
 .hero__venue-line {
@@ -1332,7 +1333,8 @@ img[loading="lazy"] {
   .hero__brand-small { font-size: 3.2vw;  line-height: 1.15; }
 
   /* Heading: title + subtitle wrapper */
-  .hero__heading { left: 6.93%; top: 10.13vw; width: 85.33%; }
+  .hero__stack { padding-top: 10.13vw; }
+  .hero__heading { width: 85.33%; margin-left: 6.93%; }
   .hero__title { font-size: 10.67vw; line-height: 1.15; }
   .hero__subtitle { margin-top: 2.67vw; font-size: 4.53vw; }
 
@@ -1345,7 +1347,7 @@ img[loading="lazy"] {
   .hero__illust { top: 30.93vw; width: 100%; height: auto; aspect-ratio: 375 / 533; }
 
   /* Date area (flex stack scales via children) */
-  .hero__date { left: 6.4%; top: 141.33vw; }
+  .hero__date { margin-top: 92.67vw; margin-left: 6.4%; }
   .hero__year  { font-size: 5.33vw; }
   .hero__dates       { gap: 2.67vw; /* = 10/375 */ }
   .hero__date-group  { gap: 1.07vw; /* = 4/375 */ }
@@ -1353,7 +1355,7 @@ img[loading="lazy"] {
   .hero__slash { width: 4.27vw; }
   .hero__day   { font-size: 4.8vw; }
   .hero__dot   { width: 1.6vw; height: 1.6vw; }
-  .hero__open  { font-size: 5.87vw; }
+  .hero__open  { margin-top: 1.07vw; font-size: 5.87vw; }
 
   /* 入場無料 badge: ヒーロー右下に重ねる (SUN の 8px 右) */
   .hero__free {
@@ -1367,7 +1369,7 @@ img[loading="lazy"] {
   .hero__free span { font-size: 5.33vw; /* = 20/375 */ }
 
   /* Venue */
-  .hero__venue { left: 6.4%; top: 169.6vw; }
+  .hero__venue { margin-top: 3.73vw; margin-left: 6.4%; }
   .hero__venue-line { height: 12.8vw; }
   .hero__venue-label {
     width: 3.73vw;
