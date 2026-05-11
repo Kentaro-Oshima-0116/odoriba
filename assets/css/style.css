@@ -451,6 +451,10 @@ body.menu-open .site-menu {
   /* digit のディセンダー分を補正して baseline に揃える */
   margin-bottom: 0.3em;
 }
+/* SAT は視覚的に下がって見えるので少し上に揃える */
+.hero__day--sat {
+  margin-bottom: 0.37em;
+}
 .hero__dot {
   display: inline-block;
   width: 6px;
