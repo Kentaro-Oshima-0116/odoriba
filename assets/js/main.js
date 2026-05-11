@@ -11,7 +11,7 @@
 
   // ============ Intersection Observer (fade-in on scroll) ============
   const fadeTargets = document.querySelectorAll(
-    '.section-head, .content-card, .entry-card, .archive__photo, .faq__item, .access__item, .about__lead, .contents__lead, .timetable__text, .archive__lead, .contact__form, .follow__link'
+    '.section-head, .content-card, .entry-card, .archive__photo, .faq__item, .access__item, .about__lead, .contents__lead, .timetable__text, .archive__lead, .contact__link, .follow__link'
   );
   fadeTargets.forEach((el) => el.classList.add('lazy-fade'));
 
@@ -54,36 +54,32 @@
     );
   });
 
-  // ============ Hero CTA follow (mobile/tablet only) ============
-  const heroCta = document.getElementById('heroCta');
+  // ============ Hamburger menu ============
+  const menuToggle = document.getElementById('menuToggle');
+  const siteMenu = document.getElementById('siteMenu');
 
-  if (heroCta) {
-    const revealOffset = 80;
-    let ticking = false;
+  if (menuToggle && siteMenu) {
+    const menuLabel = menuToggle.querySelector('.hero__menu-label');
 
-    const updateHeroCta = () => {
-      if (window.innerWidth >= 1024) {
-        heroCta.classList.remove('is-visible');
-        return;
-      }
-
-      heroCta.classList.toggle('is-visible', window.scrollY > revealOffset);
+    const setMenuOpen = (open) => {
+      document.body.classList.toggle('menu-open', open);
+      menuToggle.setAttribute('aria-expanded', String(open));
+      menuToggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      siteMenu.setAttribute('aria-hidden', String(!open));
+      if (menuLabel) menuLabel.textContent = open ? 'CLOSE' : 'MENU';
     };
 
-    updateHeroCta();
-    window.addEventListener(
-      'scroll',
-      () => {
-        if (ticking) return;
-        ticking = true;
-        window.requestAnimationFrame(() => {
-          updateHeroCta();
-          ticking = false;
-        });
-      },
-      { passive: true }
-    );
-    window.addEventListener('resize', updateHeroCta);
+    menuToggle.addEventListener('click', () => {
+      setMenuOpen(!document.body.classList.contains('menu-open'));
+    });
+
+    siteMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setMenuOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    });
   }
 
   // ============ FAQ accordion ============
@@ -172,12 +168,4 @@
     archiveScroll.addEventListener('touchstart', stopAutoScroll, { passive: true });
   }
 
-  // ============ Contact form (デモ動作) ============
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('お問い合わせを受け付けました（デモ）');
-    });
-  }
 })();
