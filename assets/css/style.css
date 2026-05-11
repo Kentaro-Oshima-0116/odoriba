@@ -850,7 +850,7 @@ body.menu-open .site-menu {
 /* ============= PARTICIPATE ============= */
 .participate {
   position: relative;
-  padding: 40px 0 48px;
+  padding: 40px 0;
   background: #1a1a1a;
   overflow: hidden;
 }
