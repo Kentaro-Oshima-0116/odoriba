@@ -1549,7 +1549,6 @@ img[loading="lazy"] {
   .page {
     margin-left: 56vw;
     max-width: 375px;
-    overflow: visible;
   }
 
   /* Hide mobile fixed CTA on PC (sidebar has its own CTAs) */
