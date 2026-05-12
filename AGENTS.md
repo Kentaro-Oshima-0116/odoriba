@@ -75,13 +75,16 @@ odoriba/
 - **Phase 2b** — Contents カード画像 crop を整理
 - **Phase 2c** — Participate のレイヤー構造整理
 - **Phase 2d** — Archive marquee を JS 計算 + CSS 変数で動的化
+- **Phase 3** — `line-height` の固定 px (14 種) を相対値に統一、FAQ の `.faq__text` を flex: 1 に
+- **Phase 4** — PC サイドバーボタンと site-menu ボタンの CSS 共通化 (重複約 60 行削除)
+- **Phase 6** — `README.md` を Next.js 残骸からプロジェクト実態に書き換え
 
-### 未着手（次以降）
+### 未着手
 
-- **Phase 3** — FAQ / Access / Follow / Contact / Footer の整理（必要なら）
-- **Phase 4** — PC サイドバー (`.pc-sidebar`) を `.btn` / `.site-menu` と共通化
-- **Phase 5** — base を本格的に fluid 化（vw/clamp/rem への置換）。タブレットの中央寄せ仕様を実装。
-- **Phase 6** — `README.md` を実態に合わせて書き換え
+- **Phase 5** — base を本格的に fluid 化（vw / clamp / rem への置換）。タブレットの中央寄せ仕様を実装。
+  - 影響範囲が大きく、3 つ以上の viewport での視覚確認が必須。対話的セッションで進めるのが安全。
+  - 関連: Phase 3b (`.section-inner` ユーティリティ抽出) も Phase 5 と合わせて対応予定。
+  - プラン詳細: `/Users/kentaro/.claude/plans/jolly-cuddling-engelbart.md` の "Phase 5" セクション
 
 各フェーズは独立した commit にして `dev` に積む（個人開発なので PR は不要）。
 
