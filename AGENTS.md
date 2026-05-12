@@ -16,31 +16,25 @@
 
 ## 設計思想（リファクタの北極星）
 
-LP は Figma で 375px 幅で設計されている。レスポンシブの方針は **SP ファースト + PC 流用型**。
+LP は Figma で 375px 幅で設計されているが、Phase 5 で **container query + cqw ベースの fluid 設計**に移行済み。SP/MD/PC で同じ 480 デザインが container width に応じてスケールする一本化アーキテクチャ。
 
-| breakpoint | レイアウト方針 |
+| 範囲 | レイアウト |
 |---|---|
-| **SP (≤767px)** | ベース CSS が描く設計。fluid (rem / clamp / vw) で 480px 程度まで自然にスケール |
-| **MD タブレット (768–1023px)** | SP デザインを中央寄せ。文字サイズ・余白の clamp() で微調整するだけで、レイアウト構造は変えない |
-| **LG PC (≥1024px)** | 左に固定サイドバー (`.pc-sidebar`)、右に SP デザインをそのまま流用 |
+| **0–479px** | `.page` が viewport 幅まで広がる。cqw で内容が等比スケール |
+| **480–1279px** | `.page` 480 で中央寄せ、両脇に body bg (#1a1a1a)。サイドバー無し |
+| **≥ 1280px** | 左に固定サイドバー `.pc-sidebar` 56vw + `.page` 480 右側 |
 
 ### 派生する設計ルール
 
-1. **ベース CSS = SP デザイン**。PC 用の絶対座標を base に書かない。
-2. **タブレットでは構造を変えない**。SP デザインがそのまま伸びる前提。
-3. **PC は装飾の追加のみ**（サイドバー、page を右にオフセット）で、ページ本体の CSS には触らない。
-4. **fluid 優先**: `vw` / `clamp()` / `%` / `rem`。固定 px は意図的に使う場面のみ（細い border など）。
-5. **Figma 座標準拠の magic number は段階的に解消**。`top: 595px` のような数値は、フェーズが進むごとに `margin-top: …` → `gap` / `padding` の構造に置き換える。
+1. **ベース CSS = SP デザイン**。`.page` は `container-type: inline-size`、内側のサイズ単位は `cqw` (= % of .page width) を優先。
+2. **タブレットでは構造を変えない**。SP デザインがそのまま 480 で頭打ちして中央寄せされる。
+3. **PC はサイドバー追加のみ** (`.page { margin-left: 56vw }`)。ページ本体は SP/MD と同じ。
+4. **fluid 優先**: 主に `cqw` / `%` / `clamp()` / `rem`。viewport 単位の `vw` は `.pc-sidebar` 等の viewport bound 要素のみ。
+5. **不要な base PX 値を残さない**。cqw rule が override する PX 値は dead code として削除する。
 
-### breakpoint 変数
+### breakpoint
 
-```css
-/* style.css のヘッダーに記載 */
---bp-md: 768px;
---bp-lg: 1024px;
-```
-
-CSS の `@media` には変数が直接使えないので、media クエリ内で px リテラルを書きつつ、上記コメントで意図を残す。
+PC サイドバー出現は `1280px`。MD と PC の境界がここ。`@media (min-width: 1280px)` で `.pc-sidebar` 表示と `.page` の右オフセットを制御。それ以外の breakpoint は不要 (cqw で全部スケールするため)。
 
 ---
 
@@ -77,14 +71,14 @@ odoriba/
 - **Phase 2d** — Archive marquee を JS 計算 + CSS 変数で動的化
 - **Phase 3** — `line-height` の固定 px (14 種) を相対値に統一、FAQ の `.faq__text` を flex: 1 に
 - **Phase 4** — PC サイドバーボタンと site-menu ボタンの CSS 共通化 (重複約 60 行削除)
+- **Phase 5** — base を fluid 化 + タブレット中央寄せ + PC 統合 (4 commits)
+  - 5 (1/N): `.page` を container query 化 (`container-type: inline-size`, max-width 480) + SP override の vw を cqw に置換
+  - 5 (2/N): PC breakpoint を 1024 → 1280 に。1024-1279 は MD 扱い。`.page` / `.site-menu` の max-width/width を 480 に。SP/MD wrapper を撤廃し cqw rules を base に格上げ
+  - 5 (3/N): cqw rules が override する base PX 値を dead code として削除 (30 行純削減)
+  - 5 (4/N): 15 セクションが個別に持っていた `width: var(--content-width); margin-inline: auto` を共通 comma セレクタ rule に集約
 - **Phase 6** — `README.md` を Next.js 残骸からプロジェクト実態に書き換え
 
-### 未着手
-
-- **Phase 5** — base を本格的に fluid 化（vw / clamp / rem への置換）。タブレットの中央寄せ仕様を実装。
-  - 影響範囲が大きく、3 つ以上の viewport での視覚確認が必須。対話的セッションで進めるのが安全。
-  - 関連: Phase 3b (`.section-inner` ユーティリティ抽出) も Phase 5 と合わせて対応予定。
-  - プラン詳細: `/Users/kentaro/.claude/plans/jolly-cuddling-engelbart.md` の "Phase 5" セクション
+リファクタの主要 Phase は全て完走。残課題があれば後続 Phase で対応。
 
 各フェーズは独立した commit にして `dev` に積む（個人開発なので PR は不要）。
 
