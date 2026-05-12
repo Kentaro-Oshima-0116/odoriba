@@ -59,12 +59,38 @@
   const siteMenu = document.getElementById('siteMenu');
 
   if (menuToggle && siteMenu) {
+    const menuFocusable = siteMenu.querySelectorAll('a, button, input, select, textarea, [tabindex]');
+    const setMenuFocusable = (enabled) => {
+      menuFocusable.forEach((el) => {
+        if (enabled) {
+          const originalTabIndex = el.dataset.originalTabIndex;
+          if (originalTabIndex === undefined) {
+            el.removeAttribute('tabindex');
+          } else {
+            el.setAttribute('tabindex', originalTabIndex);
+          }
+        } else {
+          if (el.hasAttribute('tabindex') && el.dataset.originalTabIndex === undefined) {
+            el.dataset.originalTabIndex = el.getAttribute('tabindex');
+          }
+          el.setAttribute('tabindex', '-1');
+        }
+      });
+    };
+
     const setMenuOpen = (open) => {
       document.body.classList.toggle('menu-open', open);
       menuToggle.setAttribute('aria-expanded', String(open));
       menuToggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
       siteMenu.setAttribute('aria-hidden', String(!open));
+      siteMenu.inert = !open;
+      setMenuFocusable(open);
+      if (!open && siteMenu.contains(document.activeElement)) {
+        menuToggle.focus({ preventScroll: true });
+      }
     };
+
+    setMenuOpen(false);
 
     menuToggle.addEventListener('click', () => {
       setMenuOpen(!document.body.classList.contains('menu-open'));
@@ -81,12 +107,29 @@
 
   // ============ FAQ accordion ============
   const faqItems = document.querySelectorAll('.faq__item');
-  faqItems.forEach((item) => {
+  faqItems.forEach((item, index) => {
     const btn = item.querySelector('.faq__question');
+    const answer = item.querySelector('.faq__answer');
+    if (!btn || !answer) return;
+
+    const answerId = answer.id || `faq-answer-${index + 1}`;
+    answer.id = answerId;
+    btn.setAttribute('aria-controls', answerId);
+    btn.setAttribute('aria-expanded', 'false');
+    answer.setAttribute('aria-hidden', 'true');
+
+    const setItemOpen = (target, open) => {
+      target.dataset.open = String(open);
+      const targetBtn = target.querySelector('.faq__question');
+      const targetAnswer = target.querySelector('.faq__answer');
+      if (targetBtn) targetBtn.setAttribute('aria-expanded', String(open));
+      if (targetAnswer) targetAnswer.setAttribute('aria-hidden', String(!open));
+    };
+
     btn.addEventListener('click', () => {
       const isOpen = item.dataset.open === 'true';
-      faqItems.forEach((other) => (other.dataset.open = 'false'));
-      item.dataset.open = isOpen ? 'false' : 'true';
+      faqItems.forEach((other) => setItemOpen(other, false));
+      setItemOpen(item, !isOpen);
     });
   });
 
@@ -126,6 +169,11 @@
       const clone = item.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
       clone.classList.remove('lazy-fade', 'is-visible');
+      clone.querySelectorAll('img').forEach((img) => {
+        img.style.opacity = '';
+        img.style.transition = '';
+        img.loading = 'eager';
+      });
       archiveTrack.appendChild(clone);
     });
 
