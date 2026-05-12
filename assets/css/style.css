@@ -345,50 +345,51 @@ body.menu-open .site-menu {
   height: 12px;
 }
 
-/* Top-right brand badge (緑円: 北海道最大級) */
+/* Top-right brand badge (緑円: 北海道最大級) — 位置・サイズは cqw rule で指定 */
 .hero__brand-badge {
-  position: absolute; left: 252px; top: 44px;
-  width: 140px; height: 131px;
+  position: absolute;
   z-index: 9;
   background: #95FF00;
   border-radius: 50%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding-top: 8px;
 }
 .hero__brand-large {
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 900; font-size: 20px;
-  line-height: 1.15; text-align: center;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
   color: #010101;
 }
 .hero__brand-small {
   font-family: "Noto Sans JP", sans-serif;
-  font-weight: 900; font-size: 12px;
-  line-height: 1.15; text-align: center;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
   color: #010101;
   margin-top: 6px;
 }
 
-/* ヒーロー見出し (タイトル + サブタイトル) */
+/* ヒーロー見出し (タイトル + サブタイトル) — サイズ/座標は cqw rule で指定 */
 .hero__stack {
   position: relative;
   z-index: 7;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 103px 0 0;
+  padding: 0;
   pointer-events: none;
 }
 .hero__heading {
-  width: 320px;
-  margin-left: 26px;
+  /* width / margin-left は cqw rule で % 指定 */
 }
 .hero__title {
   margin: 0;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 900;
-  font-size: 40px;
   line-height: 1.15;
   color: #fff;
   letter-spacing: -1px;
@@ -396,25 +397,21 @@ body.menu-open .site-menu {
 .hero__title .t-loose { letter-spacing: 1.6px; }
 .hero__title .t-tight { letter-spacing: -1px; }
 .hero__subtitle {
-  margin: 10px 0 0;
+  margin: 0;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
-  font-size: 17px;
   line-height: 1.25; /* Figma: 125% */
   color: #fff;
   opacity: .5;
 }
 
-/* 装飾 */
+/* 装飾 — 位置・サイズは cqw rule で指定 */
 .hero__deco { position: absolute; z-index: 5; }
-.hero__deco--tl { left: 14px;  top: 326px; width: 63px;  height: 55px; }
-.hero__deco--tr { left: 325px; top: 182px; width: 93px;  height: 105px; }
-.hero__deco--mr { left: 344px; top: 429px; width: 66px;  height: 59px; }
 
-/* ヒーローイラスト (中央) - 375x533 PNG */
+/* ヒーローイラスト — サイズは cqw rule */
 .hero__illust {
-  position: absolute; left: 0; top: 181px;
-  width: 375px; height: 533px;
+  position: absolute;
+  left: 0;
   z-index: 4;
   object-fit: contain;
 }
@@ -425,8 +422,6 @@ body.menu-open .site-menu {
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
-  margin-top: 348px;
-  margin-left: 24px;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   color: var(--c-white);
@@ -434,27 +429,22 @@ body.menu-open .site-menu {
 }
 .hero__year {
   margin: 0;
-  font-size: 20px;
   line-height: 1;
 }
 .hero__dates {
   display: flex;
   align-items: flex-end;
-  gap: 10px; /* 「9/5 SAT」⇔ ・ ⇔「9/6 SUN」 */
   margin: 0;
   line-height: 1;
 }
 .hero__date-group {
   display: flex;
   align-items: flex-end;
-  gap: 4px;
 }
 .hero__digit {
-  font-size: 46px;
   line-height: 1;
 }
 .hero__slash {
-  width: 16px;
   aspect-ratio: 16 / 33;
   align-self: center;
   object-fit: contain;
@@ -463,7 +453,6 @@ body.menu-open .site-menu {
   display: inline-block;
   writing-mode: vertical-lr;
   transform: rotate(180deg);
-  font-size: 18px;
   /* line-height = 0.78 で縦書きの column 幅を 14px に縮める (Figma 準拠) */
   line-height: calc(14 / 18);
   letter-spacing: 0;
@@ -476,25 +465,18 @@ body.menu-open .site-menu {
 }
 .hero__dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
   background: var(--c-white);
   border-radius: 50%;
   align-self: center;
 }
 .hero__open {
-  margin: 4px 0 0;
-  font-size: 22px;
+  margin: 0;
   line-height: 1;
 }
 
-/* 入場無料 badge (ヒーロー右下、ダンサーの足に重ねる) */
+/* 入場無料 badge (ヒーロー右下、ダンサーの足に重ねる) — 位置・サイズは cqw rule */
 .hero__free {
   position: absolute;
-  left: 242px;
-  top: 590px;
-  width: 92px;
-  height: 86px;
   pointer-events: none;
   z-index: 8;
 }
@@ -511,7 +493,6 @@ body.menu-open .site-menu {
   transform: rotate(8deg);
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
-  font-size: 20px;
   line-height: 1.15; /* Figma: 115% */
   color: #010101;
   text-align: center;
@@ -521,32 +502,25 @@ body.menu-open .site-menu {
 .hero__venue {
   display: flex;
   align-items: center;
-  margin-top: 14px;
-  margin-left: 24px;
   pointer-events: none;
 }
 .hero__venue-line {
   flex-shrink: 0;
   width: 2px;
-  height: 48px;
   background: #fff;
 }
 .hero__venue-label {
   flex-shrink: 0;
-  width: 14px;
-  margin: 0 8px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
-  font-size: 16px;
   line-height: 1.2;
   color: #fff;
   text-align: center;
 }
 .hero__venue-name {
-  margin: 0 0 0 16px;
+  margin: 0;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
-  font-size: 16px;
   line-height: 1.35;
   color: #fff;
   white-space: pre-wrap;
@@ -554,12 +528,8 @@ body.menu-open .site-menu {
 
 .hero__cta {
   position: absolute;
-  left: 16px;
-  top: 777px;
   bottom: auto;
   transform: none;
-  width: 343px;
-  height: 49px;
   z-index: 20;
   display: flex;
   gap: 5px;
