@@ -256,7 +256,10 @@ body.menu-open .site-menu {
   width: min(100%, 263px);
   margin-top: 32px;
 }
-.site-menu__btn {
+/* 共通 CTA ボタン: site-menu (オーバーレイ) と pc-sidebar (固定サイドバー) で使い回す
+   PC sidebar 側は @media (min-width: 1024px) 内で表示・サイズ制御 */
+.site-menu__btn,
+.pc-sidebar__btn {
   position: relative;
   display: flex;
   align-items: center;
@@ -271,40 +274,50 @@ body.menu-open .site-menu {
   line-height: 1.15;
   letter-spacing: -0.54px;
   color: #fff;
+  text-decoration: none;
 }
-.site-menu__btn--red {
+.site-menu__btn--red,
+.pc-sidebar__btn--red {
   background: #f62343;
 }
-.site-menu__btn--red::before {
+.site-menu__btn--red::before,
+.pc-sidebar__btn--red::before {
   content: "";
   position: absolute;
   inset: 0;
   background: url("../images/Mask%20group.svg") center / 100% 100% no-repeat;
 }
-.site-menu__btn--gray {
+.site-menu__btn--gray,
+.pc-sidebar__btn--gray {
   background: #d9d9d9;
-  color: rgba(0,0,0,.5);
+  color: rgba(0, 0, 0, .5);
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 0;
 }
-.site-menu__btn > span:not(.site-menu__btn-arrow) {
+.site-menu__btn > span:not(.site-menu__btn-arrow),
+.pc-sidebar__btn > span:not(.pc-sidebar__btn-arrow) {
   position: relative;
   z-index: 1;
 }
-.site-menu__btn-arrow {
+.site-menu__btn-arrow,
+.pc-sidebar__btn-arrow {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 29px;
   height: 29px;
+  flex-shrink: 0;
   z-index: 1;
 }
-.site-menu__btn--red .site-menu__btn-arrow {
+.site-menu__btn--red .site-menu__btn-arrow,
+.pc-sidebar__btn--red .pc-sidebar__btn-arrow {
   background: url("../images/Group%205447.svg") center / contain no-repeat;
 }
-.site-menu__btn--gray .site-menu__btn-arrow {
+.site-menu__btn--gray .site-menu__btn-arrow,
+.pc-sidebar__btn--gray .pc-sidebar__btn-arrow {
   background: url("../images/Group%205448.svg") center / contain no-repeat;
 }
 .site-menu__instagram {
@@ -1467,68 +1480,12 @@ img[loading="lazy"] {
     margin: 0;
   }
 
-  /* CTA button group */
+  /* CTA button group (ボタン自体は base CSS の .site-menu__btn と共有) */
   .pc-sidebar__cta {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    align-items: center;
-  }
-
-  /* CTA buttons */
-  .pc-sidebar__btn {
-    position: relative;
-    display: flex;
-    align-items: center;
     width: 263px;
-    height: 49px;
-    border-radius: 999px;
-    overflow: hidden;
-    text-decoration: none;
-    flex-shrink: 0;
-  }
-  .pc-sidebar__btn--red {
-    background: #f62343;
-  }
-  .pc-sidebar__btn--red::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: url("../images/Mask%20group.svg") center / 100% 100% no-repeat;
-  }
-  .pc-sidebar__btn--gray {
-    background: #d9d9d9;
-  }
-  .pc-sidebar__btn-text {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: "Noto Sans JP", sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 1;
-    color: #fff;
-    white-space: nowrap;
-    letter-spacing: -0.54px;
-    z-index: 1;
-  }
-  .pc-sidebar__btn-arrow {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 29px;
-    height: 29px;
-    border-radius: 50%;
-    z-index: 1;
-    flex-shrink: 0;
-  }
-  .pc-sidebar__btn--red .pc-sidebar__btn-arrow {
-    background: url("../images/Group%205447.svg") center / contain no-repeat;
-  }
-  .pc-sidebar__btn--gray .pc-sidebar__btn-arrow {
-    background: url("../images/Group%205448.svg") center / contain no-repeat;
   }
 
   /* Instagram link */
