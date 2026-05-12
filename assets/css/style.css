@@ -518,6 +518,36 @@ body.menu-open .hero__brand-badge {
   padding: 0 36px 0 10px;
 }
 
+.floating-cta {
+  position: fixed;
+  left: 50%;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 250;
+  display: flex;
+  gap: 5px;
+  width: min(calc(100vw - 32px), 439px);
+  height: 48px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, calc(100% + 24px));
+  transition: opacity .28s ease, transform .28s ease;
+}
+.floating-cta.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+.floating-cta .cta {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  padding: 0 36px 0 10px;
+}
+body.menu-open .floating-cta {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* ============= INTRO ============= */
 .intro {
   background: #0b0b0b;
@@ -1387,7 +1417,6 @@ img[loading="lazy"] {
     box-shadow: 0 8px 32px rgba(0, 0, 0, .35);
   }
 
-  /* Hide mobile fixed CTA on PC (sidebar has its own CTAs) */
-  .hero__cta { display: none !important; }
+  .floating-cta { display: none; }
 
 }

@@ -105,6 +105,47 @@
     });
   }
 
+  // ============ Floating CTA (SP/MD only) ============
+  const heroCta = document.getElementById('heroCta');
+  const floatingCta = document.getElementById('floatingCta');
+
+  if (heroCta && floatingCta) {
+    const floatingLinks = floatingCta.querySelectorAll('a, button');
+    const pcMedia = window.matchMedia('(min-width: 1280px)');
+    let ctaTicking = false;
+
+    const setFloatingCtaVisible = (visible) => {
+      floatingCta.classList.toggle('is-visible', visible);
+      floatingCta.setAttribute('aria-hidden', String(!visible));
+      floatingLinks.forEach((link) => {
+        link.tabIndex = visible ? 0 : -1;
+      });
+    };
+
+    const updateFloatingCta = () => {
+      ctaTicking = false;
+      const heroCtaRect = heroCta.getBoundingClientRect();
+      const shouldShow = !pcMedia.matches && heroCtaRect.bottom <= 0;
+      setFloatingCtaVisible(shouldShow);
+    };
+
+    const requestFloatingCtaUpdate = () => {
+      if (ctaTicking) return;
+      ctaTicking = true;
+      window.requestAnimationFrame(updateFloatingCta);
+    };
+
+    setFloatingCtaVisible(false);
+    updateFloatingCta();
+    window.addEventListener('scroll', requestFloatingCtaUpdate, { passive: true });
+    window.addEventListener('resize', requestFloatingCtaUpdate);
+    if (pcMedia.addEventListener) {
+      pcMedia.addEventListener('change', requestFloatingCtaUpdate);
+    } else {
+      pcMedia.addListener(requestFloatingCtaUpdate);
+    }
+  }
+
   // ============ FAQ accordion ============
   const faqItems = document.querySelectorAll('.faq__item');
   faqItems.forEach((item, index) => {
