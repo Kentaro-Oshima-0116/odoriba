@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# odoriba
 
-## Getting Started
+北海道・当麻町で開催されるストリートダンスイベント「**オドリバ**」の公式ランディングページ。
 
-First, run the development server:
+開催日: 2026年9月5日 (土) — 6日 (日)
+会場: 当麻スポーツセンター & 当麻町公民館まとまーる
+
+## 技術構成
+
+- バニラ HTML / CSS / JavaScript (フレームワーク・ビルドツールなし)
+- フォント: Google Fonts (Noto Sans JP / Roboto / Nunito Sans)
+- 画像: Figma から書き出した PNG / SVG (`assets/images/`)
+
+シンプルな静的サイトとして配信できる構成です。元は Next.js テンプレートから始まりましたが、現在は完全にバニラ構成に切り替わっています。
+
+## 動かす
+
+ローカルでは `index.html` を直接開けば動きます。フォントやキャッシュ周りで挙動が違うので、簡易 HTTP サーバ経由が推奨：
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Python 3 で
+python3 -m http.server 8000
+
+# または npx で
+npx serve .
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで `http://localhost:8000` を開く。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ディレクトリ構成
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+odoriba/
+├── index.html              # 単一ページ HTML
+├── assets/
+│   ├── css/style.css       # 全 CSS (約 1500 行)
+│   ├── js/main.js          # メニュー / IntersectionObserver / archive marquee
+│   └── images/             # PNG / SVG
+├── docs/
+│   └── PHASE_1C.md         # 過去フェーズの引き継ぎ指示書
+├── AGENTS.md               # AI agent 向けの設計思想・進捗ノート
+├── CLAUDE.md               # Claude Code 用 (中身は AGENTS.md 参照のみ)
+└── README.md               # このファイル
+```
 
-## Learn More
+## 設計思想
 
-To learn more about Next.js, take a look at the following resources:
+- **SP ファースト**: ベース CSS が SP デザインを描く
+- **MD タブレット (768–1023px)**: SP デザインを中央寄せ + 文字サイズ微調整
+- **LG PC (≥ 1024px)**: 左に固定サイドバー (`.pc-sidebar`) + 右に SP デザインを流用
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+詳細は [AGENTS.md](./AGENTS.md) を参照。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 開発
 
-## Deploy on Vercel
+リファクタは Phase 単位で進めています。完了済みフェーズと未着手フェーズは [AGENTS.md](./AGENTS.md#リファクタの進捗とフェーズ計画) を参照。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+コミットメッセージは `refactor:` / `fix:` / `docs:` プレフィックスで統一。
