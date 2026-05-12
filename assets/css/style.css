@@ -2,14 +2,15 @@
    ODORIBA / Vanilla CSS
 
    Design philosophy:
-   - SP-first: base styles describe the mobile design.
-   - MD (tablet, 768–1023px): SP design centered, content slightly
-     widened. Adjust only text sizes / paddings — no layout change.
-   - LG (≥ 1024px): fixed left sidebar, SP design on the right.
+   - SP-first: base CSS (container query 化) が 1 つのソース。
+     .page を container-type: inline-size + max-width: 480 にし、
+     内側のスケーリングは vw ではなく cqw で表現する。
+   - 0–479px : page が viewport 幅まで広がる
+   - 480–1279px : page 480 中央寄せ (両脇 body bg)、サイドバー無し
+   - ≥ 1280px : 左固定サイドバー (56vw) + page 480 右側
 
-   Breakpoints (kept in sync with the @media queries below):
-     --bp-md: 768px
-     --bp-lg: 1024px
+   Breakpoint:
+     --bp-lg: 1280px  (PC サイドバー出現)
    =================================================== */
 
 :root {
@@ -259,7 +260,7 @@ body.menu-open .site-menu {
   margin-top: 32px;
 }
 /* 共通 CTA ボタン: site-menu (オーバーレイ) と pc-sidebar (固定サイドバー) で使い回す
-   PC sidebar 側は @media (min-width: 1024px) 内で表示・サイズ制御 */
+   PC sidebar 側は @media (min-width: 1280px) 内で表示・サイズ制御 */
 .site-menu__btn,
 .pc-sidebar__btn {
   position: relative;
@@ -1334,97 +1335,94 @@ img[loading="lazy"] {
 }
 
 /* =================================================================
-   SP + MD RESPONSIVE  (≤ 1023px): container query (cqw) ベースで fluid
+   FLUID DESIGN RULES (container query / cqw ベース)
    基準: 375px Figma デザイン → .page 幅 (480 上限) を基準に等比拡縮
-   - SP (≤ 767px): page が viewport 幅まで拡張、最大 480
-   - MD タブレット (768–1023px): page 480 で中央寄せ、body bg が両脇に
+
+   旧 SP override の rules を base に格上げ。cqw 化により wide viewport
+   でも安全に動作するため @media wrapper 不要。PC override (≥1280) で
+   サイドバーまわりだけ別途調整。
    ================================================================= */
-@media (max-width: 1023px) {
 
-  /* .page と .hero の fluid 化は base CSS の container query (cqw) で
-     完結しているので、SP 専用の max-width 上書きは不要 */
-
-  .hero__menu {
-    right: 16px;
-    top: 24px;
-  }
-
-  /* Brand badge: left:252 top:44 → 44-65=-21 (上端にかかる) */
-  .hero__brand-badge {
-    left: 67.2%; top: -5.6cqw;
-    width: 37.33%; height: auto;
-    aspect-ratio: 140 / 131;
-  }
-  .hero__brand-large { font-size: 5.33cqw; line-height: 1.15; }
-  .hero__brand-small { font-size: 3.2cqw;  line-height: 1.15; }
-
-  /* Heading: title + subtitle wrapper */
-  .hero__stack { padding-top: 10.13cqw; }
-  .hero__heading { width: 85.33%; margin-left: 6.93%; }
-  .hero__title { font-size: 10.67cqw; line-height: 1.15; }
-  .hero__subtitle { margin-top: 2.67cqw; font-size: 4.53cqw; }
-
-  /* Decorations */
-  .hero__deco--tl { left: 3.73%;  top: 69.6cqw;  width: 16.8%;  height: auto; aspect-ratio: 63 / 55; }
-  .hero__deco--tr { left: 86.67%; top: 31.2cqw;  width: 24.8%;  height: auto; aspect-ratio: 93 / 105; }
-  .hero__deco--mr { left: 91.73%; top: 97.07cqw; width: 17.6%;  height: auto; aspect-ratio: 66 / 59; }
-
-  /* Illustration: top:181 → 181-65=116 */
-  .hero__illust { top: 30.93cqw; width: 100%; height: auto; aspect-ratio: 375 / 533; }
-
-  /* Date area (flex stack scales via children) */
-  .hero__date { margin-top: 92.67cqw; margin-left: 6.4%; }
-  .hero__year  { font-size: 5.33cqw; }
-  .hero__dates       { gap: 2.67cqw; /* = 10/375 */ }
-  .hero__date-group  { gap: 1.07cqw; /* = 4/375 */ }
-  .hero__digit { font-size: 12.27cqw; }
-  .hero__slash { width: 4.27cqw; }
-  .hero__day   { font-size: 4.8cqw; }
-  .hero__dot   { width: 1.6cqw; height: 1.6cqw; }
-  .hero__open  { margin-top: 1.07cqw; font-size: 5.87cqw; }
-
-  /* 入場無料 badge: ヒーロー右下に重ねる (SUN の 8px 右) */
-  .hero__free {
-    left: auto;
-    right: 10.93%;
-    top: 140.53cqw;
-    width: 24.53%;
-    height: auto;
-    aspect-ratio: 99 / 92;
-  }
-  .hero__free span { font-size: 5.33cqw; /* = 20/375 */ }
-
-  /* Venue */
-  .hero__venue { margin-top: 3.73cqw; margin-left: 6.4%; }
-  .hero__venue-line { height: 12.8cqw; }
-  .hero__venue-label {
-    width: 3.73cqw;
-    margin: 0 2.13cqw;
-    font-size: 4.27cqw;
-    line-height: 1.2;
-  }
-  .hero__venue-name {
-    margin-left: 4.27cqw;
-    font-size: 4.27cqw;
-    line-height: 1.35;
-  }
-
-  /* CTA: 会場下の所定位置に配置 */
-  .hero__cta {
-    position: absolute;
-    bottom: auto; top: 189.87cqw;
-    left: 4.27%; transform: none;
-    width: 91.47%; height: 49px;
-  }
-  .hero__btn      { flex: 1; width: auto; height: 49px; }
-  .hero__btn-text { font-size: 16px; }
-
+.hero__menu {
+  right: 16px;
+  top: 24px;
 }
 
+/* Brand badge: left:252 top:44 → 44-65=-21 (上端にかかる) */
+.hero__brand-badge {
+  left: 67.2%; top: -5.6cqw;
+  width: 37.33%; height: auto;
+  aspect-ratio: 140 / 131;
+}
+.hero__brand-large { font-size: 5.33cqw; line-height: 1.15; }
+.hero__brand-small { font-size: 3.2cqw;  line-height: 1.15; }
+
+/* Heading: title + subtitle wrapper */
+.hero__stack { padding-top: 10.13cqw; }
+.hero__heading { width: 85.33%; margin-left: 6.93%; }
+.hero__title { font-size: 10.67cqw; line-height: 1.15; }
+.hero__subtitle { margin-top: 2.67cqw; font-size: 4.53cqw; }
+
+/* Decorations */
+.hero__deco--tl { left: 3.73%;  top: 69.6cqw;  width: 16.8%;  height: auto; aspect-ratio: 63 / 55; }
+.hero__deco--tr { left: 86.67%; top: 31.2cqw;  width: 24.8%;  height: auto; aspect-ratio: 93 / 105; }
+.hero__deco--mr { left: 91.73%; top: 97.07cqw; width: 17.6%;  height: auto; aspect-ratio: 66 / 59; }
+
+/* Illustration: top:181 → 181-65=116 */
+.hero__illust { top: 30.93cqw; width: 100%; height: auto; aspect-ratio: 375 / 533; }
+
+/* Date area (flex stack scales via children) */
+.hero__date { margin-top: 92.67cqw; margin-left: 6.4%; }
+.hero__year  { font-size: 5.33cqw; }
+.hero__dates       { gap: 2.67cqw; /* = 10/375 */ }
+.hero__date-group  { gap: 1.07cqw; /* = 4/375 */ }
+.hero__digit { font-size: 12.27cqw; }
+.hero__slash { width: 4.27cqw; }
+.hero__day   { font-size: 4.8cqw; }
+.hero__dot   { width: 1.6cqw; height: 1.6cqw; }
+.hero__open  { margin-top: 1.07cqw; font-size: 5.87cqw; }
+
+/* 入場無料 badge: ヒーロー右下に重ねる (SUN の 8px 右) */
+.hero__free {
+  left: auto;
+  right: 10.93%;
+  top: 140.53cqw;
+  width: 24.53%;
+  height: auto;
+  aspect-ratio: 99 / 92;
+}
+.hero__free span { font-size: 5.33cqw; /* = 20/375 */ }
+
+/* Venue */
+.hero__venue { margin-top: 3.73cqw; margin-left: 6.4%; }
+.hero__venue-line { height: 12.8cqw; }
+.hero__venue-label {
+  width: 3.73cqw;
+  margin: 0 2.13cqw;
+  font-size: 4.27cqw;
+  line-height: 1.2;
+}
+.hero__venue-name {
+  margin-left: 4.27cqw;
+  font-size: 4.27cqw;
+  line-height: 1.35;
+}
+
+/* CTA: 会場下の所定位置に配置 */
+.hero__cta {
+  position: absolute;
+  bottom: auto; top: 189.87cqw;
+  left: 4.27%; transform: none;
+  width: 91.47%; height: 49px;
+}
+.hero__btn      { flex: 1; width: auto; height: 49px; }
+.hero__btn-text { font-size: 16px; }
+
 /* =================================================================
-   PC RESPONSIVE  (≥ 1024px)
+   PC RESPONSIVE  (≥ 1280px) — サイドバー + 480 page
+   1024–1279 viewport は MD 扱い (480 中央寄せ、サイドバー無し)
    ================================================================= */
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
 
   /* ---- Fixed sidebar ---- */
   .pc-sidebar {
@@ -1508,10 +1506,9 @@ img[loading="lazy"] {
     flex-shrink: 0;
   }
 
-  /* ---- Page: offset by sidebar width ---- */
+  /* ---- Page: offset by sidebar width (max-width は base の 480 を継承) ---- */
   .page {
     margin-left: 56vw;
-    max-width: 375px;
   }
 
   /* Hide mobile fixed CTA on PC (sidebar has its own CTAs) */
@@ -1528,7 +1525,7 @@ img[loading="lazy"] {
 
   .site-menu {
     inset: 0 auto 0 56vw;
-    width: 375px;
+    width: var(--page-max);
     padding-inline: 16px;
     background: rgba(255,255,255,.96);
   }
