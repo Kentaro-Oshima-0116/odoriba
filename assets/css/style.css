@@ -63,77 +63,81 @@ ul { list-style: none; padding: 0; margin: 0; }
 /* PC-only sidebar: hidden on mobile/tablet */
 .pc-sidebar { display: none; }
 
-/* ============= Common UI ============= */
-.btn {
+/* ============= CTA Button (共通コンポーネント) =============
+   使用例:
+     <a class="cta cta--red" href="...">
+       <span class="cta__text">チームエントリー</span>
+       <span class="cta__arrow"></span>
+     </a>
+   幅は親 (.hero__cta / .site-menu__cta / .pc-sidebar__cta / .timetable 等) で制御。
+   赤背景の斜めシャインは疑似要素、矢印アイコン (cta-arrow-red/cta-arrow-disabled.svg) は SVG。 */
+.cta {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  width: 100%;
+  height: 48px;
+  padding: 0 48px 0 24px;
   border-radius: 999px;
+  overflow: hidden;
+  border: 0;
+  appearance: none;
+  text-decoration: none;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 1.15;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.54px;
   white-space: nowrap;
-  letter-spacing: 0;
+  color: #fff;
+  cursor: pointer;
   transition: transform .2s, opacity .2s;
 }
-.btn:hover { opacity: .9; }
-.btn:active { transform: scale(.98); }
-.btn--cta {
-  width: 263px; height: 49px;
-  position: relative;
-  line-height: 1;
+.cta:hover { opacity: .9; }
+.cta:active { transform: scale(.98); }
+
+.cta--red {
+  background: #f62343;
 }
-.btn--red { background: #f62343; color: #fff; }
-.btn--gray {
+.cta--red::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .30) 0%, rgba(255, 255, 255, .18) 48%, rgba(255, 255, 255, .08) 100%);
+  clip-path: polygon(0 0, calc(50% - 45.49px) 0, calc(50% + 45.49px) 100%, 0 100%);
+  pointer-events: none;
+}
+.cta--gray {
   background: #d9d9d9;
   color: rgba(0, 0, 0, .5);
-  opacity: 1;
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: 16px;
+  letter-spacing: 0;
 }
-.btn--black { background: #000; color: #fff; }
 
-/* 矢印アイコン: 白丸 + 中の山形 (>) */
-.btn__arrow {
+.cta__text {
   position: relative;
-  width: 29px; height: 29px;
-  border-radius: 50%;
-  background: #fff;
-  flex-shrink: 0;
+  z-index: 1;
 }
-.btn--cta .btn__arrow {
+.cta__arrow {
   position: absolute;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
+  width: 29px;
+  height: 29px;
+  background: center / contain no-repeat;
+  z-index: 1;
 }
-.btn--gray .btn__arrow {
-  background: url("../images/Group%205448.svg") center / contain no-repeat;
+.cta--red .cta__arrow {
+  background-image: url("../images/cta-arrow-red.svg");
 }
-.btn--black .btn__arrow {
-  background: url("../images/arrow-icon.svg") center / contain no-repeat;
+.cta--gray .cta__arrow {
+  background-image: url("../images/cta-arrow-disabled.svg");
 }
-.btn--black .btn__arrow::before,
-.btn--black .btn__arrow::after,
-.btn--gray .btn__arrow::before,
-.btn--gray .btn__arrow::after {
-  content: none;
-}
-.btn__arrow::before, .btn__arrow::after {
-  content: "";
-  position: absolute;
-  width: 6px; height: 1px;
-  background: #f62343;
-  top: 50%; left: 50%;
-}
-.btn__arrow::before { transform: translate(-2px, -2px) rotate(45deg); }
-.btn__arrow::after  { transform: translate(-2px, 2px) rotate(-45deg); }
-.btn__arrow--dark::before, .btn__arrow--dark::after { background: #000; }
-.btn--black .btn__arrow::before, .btn--black .btn__arrow::after { background: #000; }
-.btn--gray .btn__arrow::before, .btn--gray .btn__arrow::after { background: #000; }
 
 /* セクション内側コンテナ: --content-width で中央寄せされる要素群を集約 */
 .section-head,
@@ -176,7 +180,8 @@ ul { list-style: none; padding: 0; margin: 0; }
   line-height: 1.6;
   margin: 0;
   color: #000;
-  width: 260px;
+  width: 100%;
+  white-space: nowrap;
 }
 .section-head--light .section-head__en,
 .section-head--light .section-head__jp { color: #fff; }
@@ -206,7 +211,7 @@ ul { list-style: none; padding: 0; margin: 0; }
   align-items: center;
   justify-content: center;
   gap: 4px;
-  background: url("../images/hamburger-star.svg") center / contain no-repeat;
+  background: url("../images/menu-star-badge.svg?v=20260512-1") center / contain no-repeat;
 }
 .hero__menu-label {
   display: grid;
@@ -289,70 +294,6 @@ body.menu-open .site-menu {
   gap: 12px;
   width: min(100%, 263px);
   margin-top: 32px;
-}
-/* 共通 CTA ボタン: site-menu (オーバーレイ) と pc-sidebar (固定サイドバー) で使い回す
-   PC sidebar 側は @media (min-width: 1280px) 内で表示・サイズ制御 */
-.site-menu__btn,
-.pc-sidebar__btn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 49px;
-  border-radius: 999px;
-  overflow: hidden;
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 1.15;
-  letter-spacing: -0.54px;
-  color: #fff;
-  text-decoration: none;
-}
-.site-menu__btn--red,
-.pc-sidebar__btn--red {
-  background: #f62343;
-}
-.site-menu__btn--red::before,
-.pc-sidebar__btn--red::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url("../images/Mask%20group.svg") center / 100% 100% no-repeat;
-}
-.site-menu__btn--gray,
-.pc-sidebar__btn--gray {
-  background: #d9d9d9;
-  color: rgba(0, 0, 0, .5);
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 0;
-}
-.site-menu__btn > span:not(.site-menu__btn-arrow),
-.pc-sidebar__btn > span:not(.pc-sidebar__btn-arrow) {
-  position: relative;
-  z-index: 1;
-}
-.site-menu__btn-arrow,
-.pc-sidebar__btn-arrow {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 29px;
-  height: 29px;
-  flex-shrink: 0;
-  z-index: 1;
-}
-.site-menu__btn--red .site-menu__btn-arrow,
-.pc-sidebar__btn--red .pc-sidebar__btn-arrow {
-  background: url("../images/Group%205447.svg") center / contain no-repeat;
-}
-.site-menu__btn--gray .site-menu__btn-arrow,
-.pc-sidebar__btn--gray .pc-sidebar__btn-arrow {
-  background: url("../images/Group%205448.svg") center / contain no-repeat;
 }
 .site-menu__instagram {
   display: inline-flex;
@@ -570,91 +511,12 @@ body.menu-open .hero__brand-badge {
   display: flex;
   gap: 5px;
 }
-
-/* CTA buttons (Figma座標準拠) */
-.hero__btn {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 169px; height: 49px;
-  border-radius: 999px;
-  z-index: 1;
-  overflow: hidden;
-  flex-shrink: 0;
+.hero__cta .cta {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  padding: 0 36px 0 10px;
 }
-.hero__btn--red {
-  background: linear-gradient(0deg, #e81738 0%, #f62343 48%, #ff3f5f 100%);
-}
-.hero__btn--red::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, #ea3959 0%, #f45470 48%, #f96680 100%);
-  clip-path: polygon(0 0, 36% 0, 68% 100%, 0 100%);
-  pointer-events: none;
-}
-.hero__btn--gray {
-  background: #d9d9d9;
-}
-.hero__btn-text {
-  position: relative;
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: 700; font-size: 16px; line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  letter-spacing: -0.54px;
-  z-index: 1;
-}
-.hero__btn-arrow {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 29px; height: 29px;
-  border-radius: 50%;
-  background: #fff;
-  z-index: 1;
-}
-.hero__btn--red .hero__btn-arrow {
-  background: url("../images/Group%205447.svg") center / contain no-repeat;
-}
-.hero__btn--red .hero__btn-arrow::before,
-.hero__btn--red .hero__btn-arrow::after {
-  content: none;
-}
-.hero__btn--gray .hero__btn-arrow {
-  background: url("../images/Group%205448.svg") center / contain no-repeat;
-}
-.hero__btn--gray .hero__btn-arrow::before,
-.hero__btn--gray .hero__btn-arrow::after {
-  content: none;
-}
-.hero__btn-arrow::before, .hero__btn-arrow::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-}
-.hero__btn-arrow::before {
-  width: 10px;
-  height: 1px;
-  background: #f62343;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-.hero__btn-arrow::after {
-  width: 6px;
-  height: 6px;
-  left: 12px;
-  top: 11px;
-  background: transparent;
-  border-top: 1px solid #f62343;
-  border-right: 1px solid #f62343;
-}
-.hero__btn-arrow--dark::before { background: #000; }
-.hero__btn-arrow--dark::after { border-color: #000; }
 
 /* ============= INTRO ============= */
 .intro {
@@ -747,6 +609,10 @@ body.menu-open .hero__brand-badge {
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400; font-size: 16px; line-height: 1.6;
   color: #fff; text-align: center;
+}
+.timetable .cta {
+  width: 263px;
+  max-width: 100%;
 }
 
 /* ============= CONTENTS ============= */
@@ -902,7 +768,6 @@ body.menu-open .hero__brand-badge {
 }
 .participate__head .section-head__en,
 .participate__head .section-head__jp { color: #fff; }
-.participate__head .section-head__jp { width: 260px; }
 .participate__lead {
   margin-block: 7px 25px;
   font-family: "Noto Sans JP", sans-serif;
@@ -974,7 +839,7 @@ body.menu-open .hero__brand-badge {
   width: 40px;
   height: 40px;
   border-radius: 999px;
-  background: url("../images/Group%205447.svg") center / contain no-repeat;
+  background: url("../images/cta-arrow-red.svg") center / contain no-repeat;
 }
 .entry-card--personal .entry-card__arrow {
   filter: grayscale(1);
@@ -1004,7 +869,7 @@ body.menu-open .hero__brand-badge {
   bottom: 7px;
   width: 12px;
   height: 12px;
-  background: url("../images/arrow.svg") center / contain no-repeat;
+  background: url("../images/icon-arrow-up-right-white.svg") center / contain no-repeat;
 }
 
 /* ============= ARCHIVE ============= */
@@ -1046,30 +911,31 @@ body.menu-open .hero__brand-badge {
   padding: 16px 0 0;
 }
 .archive__btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  width: 85px; height: 29px;
-  border: 1px solid #fff;
-  border-radius: 9999px;
-  padding: 0 12px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700; font-size: 14px; line-height: 1.6;
-  color: #fff;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
+  width: 45px;
+  height: 29px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity .2s, transform .2s;
+}
+.archive__btn:hover {
+  opacity: .8;
+}
+.archive__btn:active {
+  transform: scale(.96);
 }
 .archive__btn-icon {
-  display: inline-flex; gap: 3px;
+  width: 45px;
+  height: 29px;
+  background: url("../images/archive-control-stop.svg") center / contain no-repeat;
 }
-.archive__btn-icon::before, .archive__btn-icon::after {
-  content: ""; display: block; width: 2px; height: 8px; background: #fff;
+.archive__btn[data-state="play"] .archive__btn-icon {
+  background-image: url("../images/archive-control-play.svg");
 }
-.archive__btn[data-state="play"] .archive__btn-icon::before {
-  width: 0; height: 0;
-  border-left: 6px solid #fff;
-  border-top: 4px solid transparent;
-  border-bottom: 4px solid transparent;
-  background: transparent;
-}
-.archive__btn[data-state="play"] .archive__btn-icon::after { display: none; }
 @keyframes archive-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(calc(-1 * var(--archive-loop-width, 241px))); }
@@ -1080,8 +946,7 @@ body.menu-open .hero__brand-badge {
   background: #f5f5f5;
   padding: 40px 24px;
 }
-.faq .section-head__en,
-.faq .section-head__jp { width: 168px; }
+.faq .section-head__en { width: 168px; }
 .faq__tabs {
   display: flex; margin: 32px 0 32px;
   background: #f5f5f5;
@@ -1160,8 +1025,7 @@ body.menu-open .hero__brand-badge {
   background: #fff;
   padding: 40px 24px 48px;
 }
-.access .section-head__en,
-.access .section-head__jp { width: 195px; }
+.access .section-head__en { width: 195px; }
 .access__venue {
   margin-block: 24px 16px;
   font-family: "Noto Sans JP", sans-serif;
@@ -1180,8 +1044,11 @@ body.menu-open .hero__brand-badge {
   margin-block: 0 32px;
   background: #d9d9d9;
 }
-.access__map img {
-  width: 100%; height: 100%; object-fit: cover;
+.access__map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 .access__list {
   display: flex;
@@ -1262,8 +1129,7 @@ body.menu-open .hero__brand-badge {
   background: #fff;
   padding: clamp(40px, 10vw, 64px) 24px clamp(64px, 12vw, 96px);
 }
-.contact .section-head__en,
-.contact .section-head__jp { width: 195px; }
+.contact .section-head__en { width: 195px; }
 .contact__lead {
   margin-block: 24px;
   font-family: "Noto Sans JP", sans-serif;
@@ -1275,7 +1141,7 @@ body.menu-open .hero__brand-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 49px;
+  height: 48px;
   border-radius: 999px;
   background: #000;
   color: #fff;
@@ -1289,10 +1155,10 @@ body.menu-open .hero__brand-badge {
 .contact__link-icon {
   position: absolute;
   right: 10px;
-  top: 10px;
+  top: 9.5px;
   width: 29px;
   height: 29px;
-  background: url("../images/Group%205447.svg") center / contain no-repeat;
+  background: url("../images/icon-arrow-circle.svg") center / contain no-repeat;
 }
 
 /* ============= FOOTER ============= */
@@ -1398,10 +1264,8 @@ img[loading="lazy"] {
   position: absolute;
   bottom: auto; top: 189.87cqw;
   left: 4.27%; transform: none;
-  width: 91.47%; height: 49px;
+  width: 91.47%; height: 48px;
 }
-.hero__btn      { flex: 1; width: auto; height: 49px; }
-.hero__btn-text { font-size: 16px; }
 
 /* =================================================================
    PC RESPONSIVE  (≥ 1280px) — サイドバー + 480 page
@@ -1458,7 +1322,7 @@ img[loading="lazy"] {
     margin: 0;
   }
 
-  /* CTA button group (ボタン自体は base CSS の .site-menu__btn と共有) */
+  /* CTA button group */
   .pc-sidebar__cta {
     display: flex;
     flex-direction: column;

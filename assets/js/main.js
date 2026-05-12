@@ -107,12 +107,12 @@
   const archiveScroll = document.getElementById('archiveScroll');
   const archiveTrack = document.getElementById('archiveTrack');
   const archiveBtn = document.getElementById('archiveStopBtn');
-  const archiveText = document.getElementById('archiveStopText');
 
   let archivePlaying = true;
 
   if (archiveScroll && archiveTrack && archiveBtn) {
     archiveBtn.dataset.state = 'stop';
+    archiveBtn.setAttribute('aria-label', 'ハイライトを停止');
     archiveScroll.dataset.state = 'playing';
 
     const photoItems = Array.from(archiveTrack.children);
@@ -156,11 +156,11 @@
       archivePlaying = !archivePlaying;
       if (archivePlaying) {
         archiveBtn.dataset.state = 'stop';
-        archiveText.textContent = 'STOP';
+        archiveBtn.setAttribute('aria-label', 'ハイライトを停止');
         startAutoScroll();
       } else {
         archiveBtn.dataset.state = 'play';
-        archiveText.textContent = 'PLAY';
+        archiveBtn.setAttribute('aria-label', 'ハイライトを再生');
         stopAutoScroll();
       }
     });
