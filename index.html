@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&family=Nunito+Sans:wght@700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/css/style.css?v=20260512-50" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260512-53" />
 </head>
 <body>
 
@@ -46,7 +46,10 @@
     <section class="hero">
       <!-- Hamburger menu (top-right) -->
       <button class="hero__menu" id="menuToggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false">
-        <span class="hero__menu-label">MENU</span>
+        <span class="hero__menu-label">
+          <span class="hero__menu-label__text hero__menu-label__text--menu">MENU</span>
+          <span class="hero__menu-label__text hero__menu-label__text--close" aria-hidden="true">CLOSE</span>
+        </span>
         <span class="hero__menu-icon">
           <span></span><span></span>
         </span>
@@ -470,6 +473,6 @@
 
   </div>
 
-  <script src="assets/js/main.js?v=20260512-2" defer></script>
+  <script src="assets/js/main.js?v=20260512-3" defer></script>
 </body>
 </html>

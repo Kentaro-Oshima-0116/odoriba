@@ -209,6 +209,8 @@ ul { list-style: none; padding: 0; margin: 0; }
   background: url("../images/hamburger-star.svg") center / contain no-repeat;
 }
 .hero__menu-label {
+  display: grid;
+  grid-template: 1fr / 1fr;
   color: #000;
   text-align: center;
   font-family: "Roboto", sans-serif;
@@ -217,6 +219,13 @@ ul { list-style: none; padding: 0; margin: 0; }
   font-weight: 700;
   line-height: 1.15; /* 11.5px */
 }
+.hero__menu-label__text {
+  grid-area: 1 / 1;
+  transition: opacity .25s ease;
+}
+.hero__menu-label__text--close { opacity: 0; }
+body.menu-open .hero__menu-label__text--menu { opacity: 0; }
+body.menu-open .hero__menu-label__text--close { opacity: 1; }
 .hero__menu-icon {
   display: flex; flex-direction: column; align-items: center; gap: 3px;
 }
@@ -370,7 +379,7 @@ body.menu-open .site-menu {
 /* Top-right brand badge (緑円: 北海道最大級) — 位置・サイズは cqw rule で指定 */
 .hero__brand-badge {
   position: absolute;
-  z-index: 9;
+  z-index: 330; /* ハンバーガー (320) より上。メニュー開閉時は下記 rule でフェード */
   background: #95FF00;
   border-radius: 50%;
   display: flex;
@@ -378,6 +387,11 @@ body.menu-open .site-menu {
   align-items: center;
   justify-content: center;
   padding-top: 8px;
+  transition: opacity .25s ease;
+}
+body.menu-open .hero__brand-badge {
+  opacity: 0;
+  pointer-events: none;
 }
 .hero__brand-large {
   font-family: "Noto Sans JP", sans-serif;

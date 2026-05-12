@@ -59,14 +59,11 @@
   const siteMenu = document.getElementById('siteMenu');
 
   if (menuToggle && siteMenu) {
-    const menuLabel = menuToggle.querySelector('.hero__menu-label');
-
     const setMenuOpen = (open) => {
       document.body.classList.toggle('menu-open', open);
       menuToggle.setAttribute('aria-expanded', String(open));
       menuToggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
       siteMenu.setAttribute('aria-hidden', String(!open));
-      if (menuLabel) menuLabel.textContent = open ? 'CLOSE' : 'MENU';
     };
 
     menuToggle.addEventListener('click', () => {
