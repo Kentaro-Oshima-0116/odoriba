@@ -201,8 +201,8 @@ ul { list-style: none; padding: 0; margin: 0; }
 /* Hamburger menu (top-right corner) */
 .hero__menu {
   position: fixed;
-  right: max(16px, calc((100vw - 375px) / 2 + 16px));
-  top: 40px;
+  right: 8px;
+  top: 8px;
   width: 81px;
   height: 83px;
   z-index: 320;
@@ -266,7 +266,7 @@ body.menu-open .site-menu {
   min-height: 100%;
   background: #333;
   color: #fff;
-  padding: clamp(88px, 18vh, 132px) 44px 56px;
+  padding: 96px 44px 56px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -687,10 +687,13 @@ body.menu-open .hero__brand-badge {
   object-fit: cover;
 }
 .content-card--showcase {
-  --card-img-x: -24px;
-  --card-img-y: -14px;
-  --card-img-w: 277px;
-  --card-img-h: 291px;
+  --card-img-x: 0;
+  --card-img-y: 0;
+  --card-img-w: 100%;
+  --card-img-h: 100%;
+}
+.content-card--showcase img {
+  object-position: 70% center;
 }
 .content-card--battle {
   --card-img-x: -29px;
@@ -1387,12 +1390,4 @@ img[loading="lazy"] {
   /* Hide mobile fixed CTA on PC (sidebar has its own CTAs) */
   .hero__cta { display: none !important; }
 
-  /* Menu button: top-right of viewport */
-  .hero__menu {
-    position: fixed;
-    left: auto;
-    right: 24px;
-    top: 40px;
-    z-index: 320;
-  }
 }
