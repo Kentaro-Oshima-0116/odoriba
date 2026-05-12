@@ -135,12 +135,30 @@ ul { list-style: none; padding: 0; margin: 0; }
 .btn--black .btn__arrow::before, .btn--black .btn__arrow::after { background: #000; }
 .btn--gray .btn__arrow::before, .btn--gray .btn__arrow::after { background: #000; }
 
+/* セクション内側コンテナ: --content-width で中央寄せされる要素群を集約 */
+.section-head,
+.contents__lead,
+.contents__grid,
+.participate__lead,
+.entry-block,
+.archive__lead,
+.archive__controls,
+.faq__tabs,
+.faq__list,
+.access__venue,
+.access__address,
+.access__map,
+.access__list,
+.contact__lead,
+.contact__link {
+  width: var(--content-width);
+  margin-inline: auto;
+}
+
 .section-head {
   display: flex;
   flex-direction: column;
   gap: 0;
-  width: var(--content-width);
-  margin-inline: auto;
 }
 .section-head__en {
   font-family: "Roboto", sans-serif;
@@ -755,8 +773,7 @@ body.menu-open .site-menu {
   height: 50px;
 }
 .contents__lead {
-  width: var(--content-width);
-  margin: 16px auto 24px;
+  margin-block: 16px 24px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400; font-size: 16px; line-height: 1.6;
   color: #fff;
@@ -765,8 +782,6 @@ body.menu-open .site-menu {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  width: var(--content-width);
-  margin-inline: auto;
 }
 .content-card {
   --card-img-x: 0;
@@ -864,7 +879,6 @@ body.menu-open .site-menu {
   z-index: 1;
 }
 .participate__head {
-  width: var(--content-width);
   align-items: flex-start;
   text-align: left;
 }
@@ -872,16 +886,13 @@ body.menu-open .site-menu {
 .participate__head .section-head__jp { color: #fff; }
 .participate__head .section-head__jp { width: 260px; }
 .participate__lead {
-  width: var(--content-width);
-  max-width: var(--content-width);
-  margin: 7px auto 25px;
+  margin-block: 7px 25px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400; font-size: 16px; line-height: 1.6;
   color: #fff;
 }
 .entry-block {
-  width: var(--content-width);
-  margin: 0 auto 44px;
+  margin-block: 0 44px;
 }
 .entry-block:last-child { margin-bottom: 0; }
 .entry-card {
@@ -986,8 +997,7 @@ body.menu-open .site-menu {
 }
 .archive .section-head { padding: 0; }
 .archive__lead {
-  width: var(--content-width);
-  margin: 16px auto 24px;
+  margin-block: 16px 24px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400; font-size: 16px; line-height: 1.6;
 }
@@ -1015,8 +1025,6 @@ body.menu-open .site-menu {
 }
 .archive__controls {
   display: flex; justify-content: flex-end;
-  width: var(--content-width);
-  margin-inline: auto;
   padding: 16px 0 0;
 }
 .archive__btn {
@@ -1073,11 +1081,7 @@ body.menu-open .site-menu {
   color: #000;
   border-color: #333;
 }
-.faq__tabs,
-.faq__list {
-  width: var(--content-width);
-  margin-inline: auto;
-}
+/* .faq__tabs と .faq__list は section-inner group で width/margin-inline 制御 */
 .faq__item {
   border-bottom: 1px solid rgba(194,194,194,.5);
   margin-bottom: 0;
@@ -1141,31 +1145,27 @@ body.menu-open .site-menu {
 .access .section-head__en,
 .access .section-head__jp { width: 195px; }
 .access__venue {
-  width: var(--content-width);
-  margin: 24px auto 16px;
+  margin-block: 24px 16px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 700; font-size: 20px; line-height: 1.6;
   color: #000;
 }
 .access__address {
-  width: var(--content-width);
-  margin: 0 auto 24px;
+  margin-block: 0 24px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400; font-size: 16px; line-height: 1.6;
   color: #000;
 }
 .access__map {
-  width: var(--content-width); height: 168px;
+  height: 168px;
   border-radius: 8px; overflow: hidden;
-  margin: 0 auto 32px;
+  margin-block: 0 32px;
   background: #d9d9d9;
 }
 .access__map img {
   width: 100%; height: 100%; object-fit: cover;
 }
 .access__list {
-  width: var(--content-width);
-  margin-inline: auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -1247,8 +1247,7 @@ body.menu-open .site-menu {
 .contact .section-head__en,
 .contact .section-head__jp { width: 195px; }
 .contact__lead {
-  margin: 24px auto 24px;
-  width: var(--content-width);
+  margin-block: 24px;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400; font-size: 16px; line-height: 1.6;
   color: #000;
@@ -1258,9 +1257,7 @@ body.menu-open .site-menu {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--content-width);
   height: 49px;
-  margin-inline: auto;
   border-radius: 999px;
   background: #000;
   color: #fff;
