@@ -11,7 +11,7 @@
 
   // ============ Intersection Observer (fade-in on scroll) ============
   const fadeTargets = document.querySelectorAll(
-    '.section-head, .content-card, .entry-card, .faq__item, .access__item, .about__lead, .contents__lead, .timetable__text, .archive__lead, .contact__link, .follow__link'
+    '.section-head, .content-card, .entry-card, .faq__item, .access__item, .about__lead, .contents__lead, .contents__deco, .timetable__text, .archive__lead, .contact__link, .follow__link'
   );
   fadeTargets.forEach((el) => el.classList.add('lazy-fade'));
 
@@ -162,7 +162,7 @@
     const loopWidth = photoItems.reduce((total, item) => total + item.getBoundingClientRect().width, 0);
     if (loopWidth > 0) {
       archiveTrack.style.setProperty('--archive-loop-width', `${loopWidth}px`);
-      archiveTrack.style.setProperty('--archive-loop-duration', `${(loopWidth / 10).toFixed(2)}s`);
+      archiveTrack.style.setProperty('--archive-loop-duration', `${(loopWidth / 40).toFixed(2)}s`);
     }
 
     photoItems.forEach((item) => {
@@ -212,12 +212,6 @@
         stopAutoScroll();
       }
     });
-
-    archiveScroll.addEventListener('mouseenter', stopAutoScroll);
-    archiveScroll.addEventListener('mouseleave', () => {
-      if (archivePlaying) startAutoScroll();
-    });
-    archiveScroll.addEventListener('touchstart', stopAutoScroll, { passive: true });
   }
 
 })();
