@@ -51,12 +51,10 @@ ul { list-style: none; padding: 0; margin: 0; }
 .page {
   width: 100%;
   max-width: var(--page-max);
-  margin: 24px auto 0;
+  margin: 0 auto;
   background: #fff;
   position: relative;
   overflow: hidden;
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, .35);
   /* cqw 単位を有効化: 内側の vw を cqw に置換することで .page 幅 (480 上限)
      に対する比率になり、wide viewport でも内部スケールが暴走しない */
   container-type: inline-size;
@@ -1378,9 +1376,12 @@ img[loading="lazy"] {
     flex-shrink: 0;
   }
 
-  /* ---- Page: offset by sidebar width (max-width は base の 480 を継承) ---- */
+  /* ---- Page: offset by sidebar width (max-width は base の 480 を継承)
+         サイドバーが出る PC のみスマホ風カード化（上角丸 + 余白 + 影） ---- */
   .page {
-    margin-left: 56vw;
+    margin: 24px auto 0 56vw;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, .35);
   }
 
   /* Hide mobile fixed CTA on PC (sidebar has its own CTAs) */
