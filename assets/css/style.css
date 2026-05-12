@@ -25,8 +25,8 @@
   --c-mute: #d9d9d9;
 
   /* Layout */
-  --content-width: min(327px, calc(100vw - 48px));
-  --page-max: 375px;      /* current SP design canvas — will widen in Phase 2 */
+  --content-width: min(327px, calc(100% - 48px));
+  --page-max: 480px;      /* SP デザインの自然な拡張上限。MD はこの幅で中央寄せ */
   --page-pad: 24px;
 }
 
@@ -49,11 +49,14 @@ ul { list-style: none; padding: 0; margin: 0; }
 /* ============= Layout ============= */
 .page {
   width: 100%;
-  max-width: 375px;
+  max-width: var(--page-max);
   margin: 0 auto;
   background: #fff;
   position: relative;
   overflow: hidden;
+  /* cqw 単位を有効化: 内側の vw を cqw に置換することで .page 幅 (480 上限)
+     に対する比率になり、wide viewport でも内部スケールが暴走しない */
+  container-type: inline-size;
 }
 
 /* PC-only sidebar: hidden on mobile/tablet */
@@ -160,13 +163,12 @@ ul { list-style: none; padding: 0; margin: 0; }
 .section-head--light .section-head__jp { color: #fff; }
 
 /* ===========================================
-   HERO  (375 x 878, 黒背景 + イラスト)
+   HERO  (375 x 878 を基準に container query で fluid 化)
    =========================================== */
 .hero {
   position: relative;
   width: 100%;
-  max-width: 375px;
-  height: 878px;
+  height: calc(813 / 375 * 100cqw);
   background: #0b0b0b;
   overflow: hidden;
   color: #fff;
@@ -1332,22 +1334,15 @@ img[loading="lazy"] {
 }
 
 /* =================================================================
-   SP RESPONSIVE  (≤ 767px): 全幅 + Figma比率維持
-   基準: 375px × 878px → x軸/y軸ともに vw で等比拡縮
+   SP + MD RESPONSIVE  (≤ 1023px): container query (cqw) ベースで fluid
+   基準: 375px Figma デザイン → .page 幅 (480 上限) を基準に等比拡縮
+   - SP (≤ 767px): page が viewport 幅まで拡張、最大 480
+   - MD タブレット (768–1023px): page 480 で中央寄せ、body bg が両脇に
    ================================================================= */
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
 
-  /* ---- Page: 全幅、余白なし ---- */
-  .page {
-    max-width: none;
-    margin: 0;
-  }
-
-  /* ---- Hero: Figma実コンテンツ高さ 813px (878-65px chrome) ---- */
-  .hero {
-    max-width: none;
-    height: calc(813 / 375 * 100vw);
-  }
+  /* .page と .hero の fluid 化は base CSS の container query (cqw) で
+     完結しているので、SP 専用の max-width 上書きは不要 */
 
   .hero__menu {
     right: 16px;
@@ -1356,68 +1351,68 @@ img[loading="lazy"] {
 
   /* Brand badge: left:252 top:44 → 44-65=-21 (上端にかかる) */
   .hero__brand-badge {
-    left: 67.2%; top: -5.6vw;
+    left: 67.2%; top: -5.6cqw;
     width: 37.33%; height: auto;
     aspect-ratio: 140 / 131;
   }
-  .hero__brand-large { font-size: 5.33vw; line-height: 1.15; }
-  .hero__brand-small { font-size: 3.2vw;  line-height: 1.15; }
+  .hero__brand-large { font-size: 5.33cqw; line-height: 1.15; }
+  .hero__brand-small { font-size: 3.2cqw;  line-height: 1.15; }
 
   /* Heading: title + subtitle wrapper */
-  .hero__stack { padding-top: 10.13vw; }
+  .hero__stack { padding-top: 10.13cqw; }
   .hero__heading { width: 85.33%; margin-left: 6.93%; }
-  .hero__title { font-size: 10.67vw; line-height: 1.15; }
-  .hero__subtitle { margin-top: 2.67vw; font-size: 4.53vw; }
+  .hero__title { font-size: 10.67cqw; line-height: 1.15; }
+  .hero__subtitle { margin-top: 2.67cqw; font-size: 4.53cqw; }
 
   /* Decorations */
-  .hero__deco--tl { left: 3.73%;  top: 69.6vw;  width: 16.8%;  height: auto; aspect-ratio: 63 / 55; }
-  .hero__deco--tr { left: 86.67%; top: 31.2vw;  width: 24.8%;  height: auto; aspect-ratio: 93 / 105; }
-  .hero__deco--mr { left: 91.73%; top: 97.07vw; width: 17.6%;  height: auto; aspect-ratio: 66 / 59; }
+  .hero__deco--tl { left: 3.73%;  top: 69.6cqw;  width: 16.8%;  height: auto; aspect-ratio: 63 / 55; }
+  .hero__deco--tr { left: 86.67%; top: 31.2cqw;  width: 24.8%;  height: auto; aspect-ratio: 93 / 105; }
+  .hero__deco--mr { left: 91.73%; top: 97.07cqw; width: 17.6%;  height: auto; aspect-ratio: 66 / 59; }
 
   /* Illustration: top:181 → 181-65=116 */
-  .hero__illust { top: 30.93vw; width: 100%; height: auto; aspect-ratio: 375 / 533; }
+  .hero__illust { top: 30.93cqw; width: 100%; height: auto; aspect-ratio: 375 / 533; }
 
   /* Date area (flex stack scales via children) */
-  .hero__date { margin-top: 92.67vw; margin-left: 6.4%; }
-  .hero__year  { font-size: 5.33vw; }
-  .hero__dates       { gap: 2.67vw; /* = 10/375 */ }
-  .hero__date-group  { gap: 1.07vw; /* = 4/375 */ }
-  .hero__digit { font-size: 12.27vw; }
-  .hero__slash { width: 4.27vw; }
-  .hero__day   { font-size: 4.8vw; }
-  .hero__dot   { width: 1.6vw; height: 1.6vw; }
-  .hero__open  { margin-top: 1.07vw; font-size: 5.87vw; }
+  .hero__date { margin-top: 92.67cqw; margin-left: 6.4%; }
+  .hero__year  { font-size: 5.33cqw; }
+  .hero__dates       { gap: 2.67cqw; /* = 10/375 */ }
+  .hero__date-group  { gap: 1.07cqw; /* = 4/375 */ }
+  .hero__digit { font-size: 12.27cqw; }
+  .hero__slash { width: 4.27cqw; }
+  .hero__day   { font-size: 4.8cqw; }
+  .hero__dot   { width: 1.6cqw; height: 1.6cqw; }
+  .hero__open  { margin-top: 1.07cqw; font-size: 5.87cqw; }
 
   /* 入場無料 badge: ヒーロー右下に重ねる (SUN の 8px 右) */
   .hero__free {
     left: auto;
     right: 10.93%;
-    top: 140.53vw;
+    top: 140.53cqw;
     width: 24.53%;
     height: auto;
     aspect-ratio: 99 / 92;
   }
-  .hero__free span { font-size: 5.33vw; /* = 20/375 */ }
+  .hero__free span { font-size: 5.33cqw; /* = 20/375 */ }
 
   /* Venue */
-  .hero__venue { margin-top: 3.73vw; margin-left: 6.4%; }
-  .hero__venue-line { height: 12.8vw; }
+  .hero__venue { margin-top: 3.73cqw; margin-left: 6.4%; }
+  .hero__venue-line { height: 12.8cqw; }
   .hero__venue-label {
-    width: 3.73vw;
-    margin: 0 2.13vw;
-    font-size: 4.27vw;
+    width: 3.73cqw;
+    margin: 0 2.13cqw;
+    font-size: 4.27cqw;
     line-height: 1.2;
   }
   .hero__venue-name {
-    margin-left: 4.27vw;
-    font-size: 4.27vw;
+    margin-left: 4.27cqw;
+    font-size: 4.27cqw;
     line-height: 1.35;
   }
 
   /* CTA: 会場下の所定位置に配置 */
   .hero__cta {
     position: absolute;
-    bottom: auto; top: 189.87vw;
+    bottom: auto; top: 189.87cqw;
     left: 4.27%; transform: none;
     width: 91.47%; height: 49px;
   }
