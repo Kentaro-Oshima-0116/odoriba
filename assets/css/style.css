@@ -637,7 +637,7 @@ body.menu-open .hero__brand-badge {
 .contents__deco--zigzag {
   left: calc((100% - var(--content-width)) / 2 + var(--content-width) - 29px);
   top: 178px;
-  width: 52px;
+  width: 62px;
   height: 71px;
 }
 .contents__deco--left {
