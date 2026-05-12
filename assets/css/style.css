@@ -1291,6 +1291,18 @@ img[loading="lazy"] {
   width: 91.47%; height: 48px;
 }
 
+/* CTA がビューポートに一度出現したらそのまま下部に固定 (SP/MD のみ。
+   .is-stuck クラスは JS で付与) */
+.hero__cta.is-stuck {
+  position: fixed;
+  top: auto;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(calc(100vw - 32px), calc(var(--page-max) - 32px));
+  z-index: 250;
+}
+
 /* =================================================================
    PC RESPONSIVE  (≥ 1280px) — サイドバー + 480 page
    1024–1279 viewport は MD 扱い (480 中央寄せ、サイドバー無し)

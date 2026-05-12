@@ -105,6 +105,33 @@
     });
   }
 
+  // ============ Hero CTA sticky-at-bottom ============
+  // ヒーロー CTA がスクロールで一度ビューポートに入ったあと、画面下に固定して
+  // 常時可視に保つ。CSS 側で `display: none` (PC) が効いていれば計算もスキップ。
+  const heroCta = document.getElementById('heroCta');
+  if (heroCta) {
+    let naturalAbsTop = 0;
+    const recalc = () => {
+      heroCta.classList.remove('is-stuck');
+      const rect = heroCta.getBoundingClientRect();
+      naturalAbsTop = rect.top + window.scrollY;
+    };
+    const update = () => {
+      if (getComputedStyle(heroCta).display === 'none') return;
+      const stuck = window.scrollY + window.innerHeight > naturalAbsTop;
+      heroCta.classList.toggle('is-stuck', stuck);
+    };
+    // 初期化: レイアウト確定後に natural 位置を測る
+    if (document.readyState === 'complete') {
+      recalc();
+      update();
+    } else {
+      window.addEventListener('load', () => { recalc(); update(); }, { once: true });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', () => { recalc(); update(); });
+  }
+
   // ============ FAQ accordion ============
   const faqItems = document.querySelectorAll('.faq__item');
   faqItems.forEach((item, index) => {
