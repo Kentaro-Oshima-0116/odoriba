@@ -1182,7 +1182,7 @@ body.menu-open .floating-cta {
 /* ============= CONTACT ============= */
 .contact {
   background: #fff;
-  padding: clamp(40px, 10vw, 64px) 24px clamp(64px, 12vw, 96px);
+  padding: clamp(40px, 10vw, 64px) 24px clamp(96px, 18vw, 128px);
 }
 .contact .section-head__en { width: 195px; }
 .contact__lead {
