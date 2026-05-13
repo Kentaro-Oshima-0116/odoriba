@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&family=Nunito+Sans:wght@700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/css/style.css?v=20260512-102" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260513-12" />
 </head>
 <body>
 
@@ -227,7 +227,7 @@
             <span class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</span>
             <span class="entry-card__arrow"></span>
           </a>
-          <a href="#" class="entry-doc-link">チーム申込説明書はこちら</a>
+          <a href="https://drive.google.com/drive/folders/1a1V-e0pGCzmp4M9ZZjUYChMsrXgrnKM3?usp=drive_link" class="entry-doc-link" target="_blank" rel="noopener">チーム申込説明書はこちら</a>
         </div>
 
         <div class="entry-block">
@@ -236,7 +236,7 @@
             <span class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</span>
             <span class="entry-card__arrow"></span>
           </a>
-          <a href="#" class="entry-doc-link">個人申込説明書はこちら</a>
+          <a href="https://drive.google.com/file/d/1hCh5zIEdeDwPBCRq5Abg2wi3HGWT1XYP/view?usp=drive_link" class="entry-doc-link" target="_blank" rel="noopener">個人申込説明書はこちら</a>
         </div>
       </div>
     </section>
@@ -300,7 +300,7 @@
         <button class="faq__tab faq__tab--active" role="tab" data-tab="visitor" aria-selected="true">来場者向け</button>
       </div>
 
-      <ul class="faq__list">
+      <ul class="faq__list" data-tab="visitor">
         <li class="faq__item">
           <button class="faq__question">
             <span class="faq__q">Q</span>
@@ -380,6 +380,89 @@
             <span class="faq__icon"></span>
           </button>
           <div class="faq__answer"><p>公式Instagramおよび本サイトで順次公開予定です。</p></div>
+        </li>
+      </ul>
+
+      <ul class="faq__list" data-tab="participant" hidden>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">申し込み後のキャンセルや変更はできますか？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>チーム、個人それぞれの申し込み期間内であれば申し込みページ内で対応できます。期間外におきましては原則不可能となっております。やむを得ない場合はHP内のお問い合わせよりご連絡ください。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">１作品の制限時間はありますか？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>１作品４分以内とさせていただいております。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">出演する作品数や出演人数に制限はありますか？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>ございません。同チーム名または同メンバーによる複数の作品についてはお断りさせていただく場合がございます。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">出演するステージの選択はできますか？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>原則できません。ステージに大小があるため基本的には人数によって振り分けさせていただきます。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">出演日、出演時刻の指定はできますか？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>出演日に関してはお申し込みの際に選択いただいた日程で調整いたします。出演時刻はご希望に添えないことが多いと思います。ご了承ください。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">曲の提出方法は？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>CDに(チーム名・出演時間枠・出演枠内の順番・板付or音先)を記載の上、当日受付時に提出してください。またCDは１トラックにまとめ、WAVやMP3を焼き付けた音楽CDとして作成してください。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">出演者の会場入り時間は？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>代表者は出演メンバーを確認の上、出演枠の1時間前に会場に到着・受付をお願いします。また、出演の３作品前にステージ袖に待機してください。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">上靴は必要ですか？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>スポーツセンター内は全面、まとまーる内はステージ上のみ土足禁止となっております。ショーケースまたはバトルに出演するダンサーは上靴が必要となります。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">作品で小道具は使用できますか？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>使用可能となっておりますが、ステージ床やその他機材の損傷となりうるモノや観客へ危害となりうるモノについては禁止とさせていただきます。</p></div>
+        </li>
+        <li class="faq__item">
+          <button class="faq__question">
+            <span class="faq__q">Q</span>
+            <span class="faq__text">出演者用の控え室はありますか？</span>
+            <span class="faq__icon"></span>
+          </button>
+          <div class="faq__answer"><p>両会場にございます。長時間における待機や場所の占領はご遠慮ください。また貴重品の紛失や盗難におきましては当イベントでは責任を負いかねますのでご了承ください。</p></div>
         </li>
       </ul>
     </section>
@@ -509,6 +592,6 @@
     </div>
   </nav>
 
-  <script src="assets/js/main.js?v=20260512-10" defer></script>
+  <script src="assets/js/main.js?v=20260513-1" defer></script>
 </body>
 </html>

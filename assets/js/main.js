@@ -148,6 +148,13 @@
 
   // ============ FAQ accordion ============
   const faqItems = document.querySelectorAll('.faq__item');
+  const setFaqItemOpen = (target, open) => {
+    target.dataset.open = String(open);
+    const targetBtn = target.querySelector('.faq__question');
+    const targetAnswer = target.querySelector('.faq__answer');
+    if (targetBtn) targetBtn.setAttribute('aria-expanded', String(open));
+    if (targetAnswer) targetAnswer.setAttribute('aria-hidden', String(!open));
+  };
   faqItems.forEach((item, index) => {
     const btn = item.querySelector('.faq__question');
     const answer = item.querySelector('.faq__answer');
@@ -159,23 +166,16 @@
     btn.setAttribute('aria-expanded', 'false');
     answer.setAttribute('aria-hidden', 'true');
 
-    const setItemOpen = (target, open) => {
-      target.dataset.open = String(open);
-      const targetBtn = target.querySelector('.faq__question');
-      const targetAnswer = target.querySelector('.faq__answer');
-      if (targetBtn) targetBtn.setAttribute('aria-expanded', String(open));
-      if (targetAnswer) targetAnswer.setAttribute('aria-hidden', String(!open));
-    };
-
     btn.addEventListener('click', () => {
       const isOpen = item.dataset.open === 'true';
-      faqItems.forEach((other) => setItemOpen(other, false));
-      setItemOpen(item, !isOpen);
+      faqItems.forEach((other) => setFaqItemOpen(other, false));
+      setFaqItemOpen(item, !isOpen);
     });
   });
 
   // ============ FAQ tabs ============
   const tabs = document.querySelectorAll('.faq__tab');
+  const faqLists = document.querySelectorAll('.faq__list');
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       tabs.forEach((t) => {
@@ -184,6 +184,13 @@
       });
       tab.classList.add('faq__tab--active');
       tab.setAttribute('aria-selected', 'true');
+
+      const target = tab.dataset.tab;
+      faqLists.forEach((list) => {
+        const match = list.dataset.tab === target;
+        list.hidden = !match;
+      });
+      faqItems.forEach((item) => setFaqItemOpen(item, false));
     });
   });
 
