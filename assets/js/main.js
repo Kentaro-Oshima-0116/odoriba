@@ -11,7 +11,7 @@
 
   // ============ Intersection Observer (fade-in on scroll) ============
   const fadeTargets = document.querySelectorAll(
-    '.section-head, .content-card, .entry-card, .faq__item, .access__item, .about__lead, .contents__lead, .contents__deco, .timetable__text, .archive__lead, .contact__link, .follow__link'
+    '.section-head, .content-card, .entry-card, .faq__item, .access__item, .about__lead, .contents__lead, .contents__deco, .timetable__text, .archive__lead, .follow__link'
   );
   fadeTargets.forEach((el) => el.classList.add('lazy-fade'));
 
