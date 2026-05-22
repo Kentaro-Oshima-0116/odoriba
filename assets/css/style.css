@@ -822,7 +822,7 @@ body.menu-open .floating-cta {
   width: 100%; height: 158px;
   overflow: hidden;
   border-radius: 24px;
-  padding: 25px 24px 23px;
+  padding: 25px 24px 23px 16px;
   color: #fff;
 }
 .entry-card::before {
