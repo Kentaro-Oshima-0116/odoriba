@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Roboto:wght@400;500;700&family=Nunito+Sans:wght@700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/css/style.css?v=20260513-19" />
+  <link rel="stylesheet" href="assets/css/style.css?v=20260519-1" />
 </head>
 <body>
 
@@ -23,14 +23,14 @@
       <p class="pc-sidebar__badge">北海道最大級<br /><span>ストリートダンスイベント</span></p>
       <img class="pc-sidebar__logo" src="assets/images/logo-odoriba.webp" alt="オドリバ ASAHIKAWA" loading="eager" />
       <div class="pc-sidebar__cta">
-        <a href="#participate" class="cta cta--red">
+        <a href="https://eventpay.jp/list_view/?shop_code=3348145615424627&amp;search_category_id=19161" target="_blank" rel="noopener noreferrer" class="cta cta--red">
           <span class="cta__text">チームエントリー</span>
           <span class="cta__arrow"></span>
         </a>
-        <a href="#participate" class="cta cta--gray">
+        <span class="cta cta--gray cta--disabled" aria-disabled="true">
           <span class="cta__text">個人エントリー</span>
           <span class="cta__arrow"></span>
-        </a>
+        </span>
       </div>
       <a href="https://www.instagram.com/odoriba_ash" target="_blank" rel="noopener noreferrer" class="pc-sidebar__insta">
         <img src="assets/images/icon-instagram.svg" alt="" loading="lazy" decoding="async" />
@@ -115,14 +115,14 @@
 
       <!-- CTA buttons -->
       <div class="hero__cta" id="heroCta">
-        <a href="#participate" class="cta cta--red">
+        <a href="https://eventpay.jp/list_view/?shop_code=3348145615424627&amp;search_category_id=19161" target="_blank" rel="noopener noreferrer" class="cta cta--red">
           <span class="cta__text">チームエントリー</span>
           <span class="cta__arrow"></span>
         </a>
-        <a href="#participate" class="cta cta--gray">
+        <span class="cta cta--gray cta--disabled" aria-disabled="true">
           <span class="cta__text">個人エントリー</span>
           <span class="cta__arrow"></span>
-        </a>
+        </span>
       </div>
     </section>
 
@@ -153,7 +153,7 @@
 
       <section class="timetable">
         <p class="timetable__text">タイムテーブルは後日公開予定。<br />公式Instagramをご確認ください。</p>
-        <button class="cta cta--gray" type="button">
+        <button class="cta cta--gray cta--disabled" type="button" disabled aria-disabled="true">
           <span class="cta__text">8月中旬タイムテーブル公開</span>
           <span class="cta__arrow"></span>
         </button>
@@ -222,7 +222,7 @@
         <p class="participate__lead">ショーケース・バトル、<br />どちらへの参加も受け付けています。</p>
 
         <div class="entry-block">
-          <a href="#" class="entry-card entry-card--team">
+          <a href="https://eventpay.jp/list_view/?shop_code=3348145615424627&amp;search_category_id=19161" target="_blank" rel="noopener noreferrer" class="entry-card entry-card--team">
             <span class="entry-card__title">チームエントリー</span>
             <span class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</span>
             <span class="entry-card__arrow"></span>
@@ -231,11 +231,11 @@
         </div>
 
         <div class="entry-block">
-          <a href="#" class="entry-card entry-card--personal" aria-disabled="true">
+          <span class="entry-card entry-card--personal" aria-disabled="true">
             <span class="entry-card__title">個人エントリー</span>
             <span class="entry-card__period">エントリー期間<br />2026年XX月XX日〜XX月XX日</span>
             <span class="entry-card__arrow"></span>
-          </a>
+          </span>
           <a href="https://drive.google.com/file/d/1hCh5zIEdeDwPBCRq5Abg2wi3HGWT1XYP/view?usp=drive_link" class="entry-doc-link" target="_blank" rel="noopener">個人申込説明書はこちら</a>
         </div>
       </div>
@@ -546,14 +546,14 @@
 
   <!-- ================== FLOATING CTA (SP/MD only, appears after hero CTA scrolls out) ================== -->
   <div class="floating-cta" id="floatingCta" aria-hidden="true">
-    <a href="#participate" class="cta cta--red" tabindex="-1">
+    <a href="https://eventpay.jp/list_view/?shop_code=3348145615424627&amp;search_category_id=19161" target="_blank" rel="noopener noreferrer" class="cta cta--red" tabindex="-1">
       <span class="cta__text">チームエントリー</span>
       <span class="cta__arrow"></span>
     </a>
-    <a href="#participate" class="cta cta--gray" tabindex="-1">
+    <span class="cta cta--gray cta--disabled" aria-disabled="true">
       <span class="cta__text">個人エントリー</span>
       <span class="cta__arrow"></span>
-    </a>
+    </span>
   </div>
 
   <!-- ================== SITE MENU (overlay, outside .page so fixed positioning is viewport-bound) ================== -->
@@ -569,14 +569,14 @@
       </ul>
 
       <div class="site-menu__cta">
-        <a href="#participate" class="cta cta--red">
+        <a href="https://eventpay.jp/list_view/?shop_code=3348145615424627&amp;search_category_id=19161" target="_blank" rel="noopener noreferrer" class="cta cta--red">
           <span class="cta__text">チームエントリー</span>
           <span class="cta__arrow"></span>
         </a>
-        <a href="#participate" class="cta cta--gray">
+        <span class="cta cta--gray cta--disabled" aria-disabled="true">
           <span class="cta__text">Coming Soon…</span>
           <span class="cta__arrow"></span>
-        </a>
+        </span>
       </div>
 
       <a href="https://www.instagram.com/odoriba_ash" target="_blank" rel="noopener noreferrer" class="site-menu__instagram">

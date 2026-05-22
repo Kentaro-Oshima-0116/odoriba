@@ -96,6 +96,10 @@ ul { list-style: none; padding: 0; margin: 0; }
 }
 .cta:hover { opacity: .9; }
 .cta:active { transform: scale(.98); }
+.cta--disabled {
+  cursor: default;
+  pointer-events: none;
+}
 
 .cta--red {
   background: #f62343;
@@ -846,6 +850,10 @@ body.menu-open .floating-cta {
 .entry-card--personal {
   background: #d9d9d9;
   color: rgba(255,255,255,.88);
+}
+.entry-card[aria-disabled="true"] {
+  cursor: default;
+  pointer-events: none;
 }
 .entry-card > * {
   position: relative;
