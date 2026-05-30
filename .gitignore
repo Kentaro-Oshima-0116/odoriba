@@ -56,3 +56,6 @@ out/
 
 # Logs
 *.log
+
+# Distribution archive (build artifact)
+odoriba-site.zip
