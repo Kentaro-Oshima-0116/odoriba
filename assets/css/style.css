@@ -22,6 +22,7 @@
   --c-white: #fff;
   --c-black: #000;
   --c-red: #f62343;
+  --c-blue: #2170F7;  /* 個人エントリー公開時のボタン色 */
   --c-lime: #95FF00;
   --c-mute: #d9d9d9;
 
@@ -117,6 +118,27 @@ ul { list-style: none; padding: 0; margin: 0; }
 .cta--gray {
   background: #d9d9d9;
   color: #fff;
+}
+/* 個人エントリー公開時に有効化（現在は cta--gray cta--disabled で無効表示）。
+   公開時のマークアップ変更:
+     <span class="cta cta--gray cta--disabled" aria-disabled="true">
+       → <a href="(個人エントリーのEventPay URL)" target="_blank" rel="noopener noreferrer" class="cta cta--blue">
+   ※ .cta--red と同じ白ツヤ + 矢印アイコンを青背景で使用 */
+.cta--blue {
+  background: var(--c-blue);
+}
+.cta--blue::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .35) 0%, rgba(255, 255, 255, 0) 100%);
+  clip-path: polygon(0 0, calc(50% - 45.49px) 0, calc(50% + 45.49px) 100%, 0 100%);
+  pointer-events: none;
+}
+.cta--blue .cta__arrow {
+  background-image: url("../images/cta-arrow-red.svg");
 }
 
 .cta__text {
@@ -850,6 +872,19 @@ body.menu-open .floating-cta {
 .entry-card--personal {
   background: #d9d9d9;
   color: rgba(255,255,255,.88);
+}
+/* 個人エントリー公開時に有効化（現在は entry-card--personal で無効表示）。
+   公開時のマークアップ変更:
+     <span class="entry-card entry-card--personal" aria-disabled="true">
+       → <a href="(個人エントリーのEventPay URL)" target="_blank" rel="noopener noreferrer"
+            class="entry-card entry-card--personal entry-card--personal--live"> */
+.entry-card--personal--live {
+  background: var(--c-blue);
+  color: var(--c-white);
+}
+.entry-card--personal--live .entry-card__arrow {
+  filter: none;
+  opacity: 1;
 }
 .entry-card[aria-disabled="true"] {
   cursor: default;
