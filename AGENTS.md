@@ -113,15 +113,15 @@ odoriba/
 **運用方針（ミーティングで決定）**: 公開版を**別ファイルとして用意しておき、期間が来たらそれをさくらサーバーにデプロイ**する。本番の `index.html` 自体は触らず、差し替えで対応する。
 
 - **現行（公開前）**: `index.html` … 個人エントリーは無効（グレー）表示
-- **公開版（待機中）**: `index-personal-open.html` … 個人エントリーを有効化（青 `#2170F7` `.cta--blue` / `.entry-card--personal--live`）。CSS は共通の `assets/css/style.css`（青スタイル仕込み済み）を参照
+- **公開版（待機中）**: `_index.html` … 個人エントリーを有効化（青 `#2170F7` `.cta--blue` / `.entry-card--personal--live`）。CSS は共通の `assets/css/style.css`（青スタイル仕込み済み）を参照
 - 公開版で有効化済みの個人エントリー = 5箇所（PCサイドバー / ヒーロー / 追従CTA / サイトメニュー / 参加カード）。タイムテーブルボタン（`8月中旬…`）は個人エントリーではないので対象外
 - サイトメニューの「Coming Soon…」は公開版では「個人エントリー」表記に変更済み
 
-個人エントリーの EventPay URL は確定済み: `shop_code=3348145615424627&search_category_id=19162`（チームは `19161`）。`index-personal-open.html` の 5 箇所に反映済みで、**そのままデプロイ可能**。
+個人エントリーの EventPay URL は確定済み: `shop_code=3348145615424627&search_category_id=19162`（チームは `19161`）。`_index.html` の 5 箇所に反映済みで、**そのままデプロイ可能**。
 
 ### 公開日にやること
 
-1. さくらサーバーに `index-personal-open.html` を **`index.html` として** アップロード（上書きデプロイ）。**`assets/css/style.css`（青スタイル入り）も忘れず一緒にアップ**。
+1. さくらサーバーに `_index.html` を **`index.html` として** アップロード（上書きデプロイ）。**`assets/css/style.css`（青スタイル入り）も忘れず一緒にアップ**。
 2. キャッシュバスト（`style.css?v=` 等）を上げると確実。
 
 ### 補足
