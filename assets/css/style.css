@@ -886,6 +886,16 @@ body.menu-open .floating-cta {
   filter: none;
   opacity: 1;
 }
+/* 受付終了したエントリーカード用のグレー無効表示（_index.html でチームカードに使用）。
+   赤の entry-card--team を entry-card--closed に置換し <span aria-disabled> 化 */
+.entry-card--closed {
+  background: var(--c-mute);
+  color: rgba(255,255,255,.88);
+}
+.entry-card--closed .entry-card__arrow {
+  filter: grayscale(1);
+  opacity: .65;
+}
 .entry-card[aria-disabled="true"] {
   cursor: default;
   pointer-events: none;
