@@ -57,5 +57,6 @@ out/
 # Logs
 *.log
 
-# Distribution archive (build artifact)
-odoriba-site.zip
+# Distribution archive (build artifact) と、その展開フォルダ
+odoriba-site*.zip
+odoriba-site*/
